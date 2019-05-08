@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace routine_explorer.Models
@@ -11,6 +12,9 @@ namespace routine_explorer.Models
         public string NameOfFilesUploaded { get; set; }
 
         [Required]
-        public string statusOfPublish { get; set; }
+        public bool statusOfPublish { get; set; }
+
+        [Required, DataType(DataType.DateTime)]
+        public DateTime TimeOfUpload { get; set; }
     }
 }
