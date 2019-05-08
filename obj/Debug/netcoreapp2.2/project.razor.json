@@ -2769,6 +2769,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views/RoutineFileUploaderStatuses/Index.cshtml",
+      "TargetPath": "Views/RoutineFileUploaderStatuses/Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views/Home/Index.cshtml",
       "TargetPath": "Views/Home/Index.cshtml",
       "FileKind": "mvc"
@@ -2779,8 +2784,33 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views/RoutineFileUploaderStatuses/Edit.cshtml",
+      "TargetPath": "Views/RoutineFileUploaderStatuses/Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Feedbacks/Details.cshtml",
+      "TargetPath": "Views/Feedbacks/Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Areas/Identity/Pages/_ValidationScriptsPartial.cshtml",
       "TargetPath": "Areas/Identity/Pages/_ValidationScriptsPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Audits/Create.cshtml",
+      "TargetPath": "Views/Audits/Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Feedbacks/Delete.cshtml",
+      "TargetPath": "Views/Feedbacks/Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Audits/Edit.cshtml",
+      "TargetPath": "Views/Audits/Edit.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -2789,8 +2819,33 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views/Routines/Edit.cshtml",
+      "TargetPath": "Views/Routines/Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Feedbacks/Edit.cshtml",
+      "TargetPath": "Views/Feedbacks/Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Audits/Details.cshtml",
+      "TargetPath": "Views/Audits/Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views/_ViewImports.cshtml",
       "TargetPath": "Views/_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/RoutineFileUploaderStatuses/Create.cshtml",
+      "TargetPath": "Views/RoutineFileUploaderStatuses/Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/RoutineFileUploaderStatuses/Delete.cshtml",
+      "TargetPath": "Views/RoutineFileUploaderStatuses/Delete.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -2809,8 +2864,43 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views/Feedbacks/Index.cshtml",
+      "TargetPath": "Views/Feedbacks/Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Feedbacks/Create.cshtml",
+      "TargetPath": "Views/Feedbacks/Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/RoutineFileUploaderStatuses/Details.cshtml",
+      "TargetPath": "Views/RoutineFileUploaderStatuses/Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Audits/Index.cshtml",
+      "TargetPath": "Views/Audits/Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Audits/Delete.cshtml",
+      "TargetPath": "Views/Audits/Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Areas/Identity/Pages/_ViewStart.cshtml",
       "TargetPath": "Areas/Identity/Pages/_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Routines/Index.cshtml",
+      "TargetPath": "Views/Routines/Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Routines/Delete.cshtml",
+      "TargetPath": "Views/Routines/Delete.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -2821,6 +2911,11 @@
     {
       "FilePath": "Views/Shared/_LoginPartial.cshtml",
       "TargetPath": "Views/Shared/_LoginPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Routines/Create.cshtml",
+      "TargetPath": "Views/Routines/Create.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -2836,6 +2931,11 @@
     {
       "FilePath": "Views/Shared/_Layout.cshtml",
       "TargetPath": "Views/Shared/_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Routines/Details.cshtml",
+      "TargetPath": "Views/Routines/Details.cshtml",
       "FileKind": "mvc"
     }
   ]
