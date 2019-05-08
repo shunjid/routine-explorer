@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace routine_explorer.Models
 {
-    public class Status
+    public class RoutineFileUploaderStatus
     {
         [Key]
         public int Id { get; set; }

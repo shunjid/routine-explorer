@@ -21,5 +21,9 @@ namespace routine_explorer.Models
 
         [Required]
         public string TimeRange { get; set; }
+
+        [Required]
+        public RoutineFileUploaderStatus Status { get; set; }
+
     }
 }
