@@ -2809,6 +2809,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views/Shared/_ValidateFileExtension.cshtml",
+      "TargetPath": "Views/Shared/_ValidateFileExtension.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Views/Audits/Edit.cshtml",
       "TargetPath": "Views/Audits/Edit.cshtml",
       "FileKind": "mvc"
