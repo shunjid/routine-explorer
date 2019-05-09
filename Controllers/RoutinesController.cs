@@ -79,7 +79,7 @@ namespace routine_explorer.Controllers
 
             Audit audit = new Audit();
             audit.UserIP = (string)objectData["IPv4"];
-            audit.UserLocation = (string)objectData["latitude"]+","+(string)objectData["longitude"]+","+(string)objectData["city"];
+            audit.UserLocation = (string)objectData["latitude"] + "," + (string)objectData["longitude"] + "," + (string)objectData["city"];
             audit.AreaAccessed = "/Create/FileUpload";
             audit.ActionDateTime = DateTime.Now;
 
@@ -177,7 +177,7 @@ namespace routine_explorer.Controllers
                     _context.Add(item);
                 }
                 _context.Add(audit);
-            
+
                 await _context.SaveChangesAsync();
                 ViewBag.Signal = "File Uploaded Successfully";
             }
