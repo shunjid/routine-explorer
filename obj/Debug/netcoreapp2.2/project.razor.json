@@ -2909,6 +2909,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "Views/Shared/_ValidationAutoComplete.cshtml",
+      "TargetPath": "Views/Shared/_ValidationAutoComplete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "Areas/Identity/Pages/Account/Login.cshtml",
       "TargetPath": "Areas/Identity/Pages/Account/Login.cshtml",
       "FileKind": "mvc"

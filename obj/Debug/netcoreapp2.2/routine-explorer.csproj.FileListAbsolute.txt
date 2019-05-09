@@ -57,3 +57,4 @@
 /home/shunjid/Documents/web/dotnet/routine-explorer/obj/Debug/netcoreapp2.2/Razor/Views/RoutineFileUploaderStatuses/Edit.g.cshtml.cs
 /home/shunjid/Documents/web/dotnet/routine-explorer/obj/Debug/netcoreapp2.2/Razor/Views/RoutineFileUploaderStatuses/Index.g.cshtml.cs
 /home/shunjid/Documents/web/dotnet/routine-explorer/obj/Debug/netcoreapp2.2/Razor/Views/Shared/_ValidateFileExtension.g.cshtml.cs
+/home/shunjid/Documents/web/dotnet/routine-explorer/obj/Debug/netcoreapp2.2/Razor/Views/Shared/_ValidationAutoComplete.g.cshtml.cs

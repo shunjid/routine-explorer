@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<routine_explorer.Models.RoutineFileUploaderStatus>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +8,61 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+
+<div class="row center">
+    <div class="col-md-12">
+        <form method="post" autocomplete="off" asp-action="Index" asp-controller="Routines" enctype="multipart/form-data">
+            <div class="form-group">
+                <select class="form-control custom-select" id="selected" name="selected">
+                    @foreach (var item in Model)
+                    {
+                    <option value=@item.Id>@Html.DisplayFor(modelItem => item.NameOfFilesUploaded)</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+               <label for="subject1">Subject Code 1</label>
+                <input type="text" class="form-control" id="subject1" name="subject1" placeholder="SWEXXXA">
+            </div>
+
+            <div class="form-group">
+               <label for="subject2">Subject Code 2</label>
+                <input type="text" class="form-control" id="subject2" name="subject2" placeholder="SWEXXXA">
+            </div>
+
+            <div class="form-group">
+               <label for="subject3">Subject Code 3</label>
+                <input type="text" class="form-control" id="subject3" name="subject3" placeholder="SWEXXXA">
+            </div>
+
+            <div class="form-group">
+               <label for="subject4">Subject Code 4</label>
+                <input type="text" class="form-control" id="subject4" name="subject4" placeholder="SWEXXXA">
+            </div>
+
+            <div class="form-group">
+               <label for="subject5">Subject Code 5</label>
+                <input type="text" class="form-control" id="subject5" name="subject5" placeholder="SWEXXXA">
+            </div>
+            
+            <div class="col-md-12 text-center">
+                    <div class="form-group">
+                    <input type="submit" value="Check Routine" class="btn btn-outline-primary" />  
+            </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationAutoComplete");}
+}
+
+
+
+
+
+

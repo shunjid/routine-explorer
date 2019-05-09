@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,38 @@ namespace routine_explorer.Controllers
         // GET: Routines
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Routine.ToListAsync());
+            return View(await _context.Routine.Where(m => m.Status.Id == 0).ToListAsync());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(IFormCollection formFields)
+        {
+            return View(await _context.Routine
+            .OrderBy(d => d.DayOfWeek)
+            .Where(m => m.Status.Id == int.Parse(formFields["selected"]))
+            .Where(x => x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject1"].ToString()))
+            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject2"].ToString()))
+            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject3"].ToString()))
+            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject4"].ToString()))
+            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject5"].ToString())))
+            .ToListAsync());
+        }
+
+        private string sanitizeCourseCodeInput(string courseCode)
+        {
+            if (courseCode == "" || courseCode.Replace(" ", String.Empty) == "")
+            {
+                return "nocourse";
+            }
+            if (courseCode.ToUpper().StartsWith("AOL"))
+            {
+                return "AOL";
+            }
+            else
+            {
+                string courseInside = courseCode.ToUpper().Replace(" ", String.Empty);
+                return courseInside;
+            }
         }
 
         // GET: Routines/Details/5
