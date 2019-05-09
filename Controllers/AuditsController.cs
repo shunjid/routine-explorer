@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,12 +21,14 @@ namespace routine_explorer.Controllers
         }
 
         // GET: Audits
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Audit.ToListAsync());
         }
 
         // GET: Audits/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +47,7 @@ namespace routine_explorer.Controllers
         }
 
         // GET: Audits/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +58,7 @@ namespace routine_explorer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,UserIP,UserLocation,AreaAccessed,ActionDateTime")] Audit audit)
         {
             if (ModelState.IsValid)
@@ -66,6 +71,7 @@ namespace routine_explorer.Controllers
         }
 
         // GET: Audits/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +92,7 @@ namespace routine_explorer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UserIP,UserLocation,AreaAccessed,ActionDateTime")] Audit audit)
         {
             if (id != audit.Id)
@@ -117,6 +124,7 @@ namespace routine_explorer.Controllers
         }
 
         // GET: Audits/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +145,7 @@ namespace routine_explorer.Controllers
         // POST: Audits/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var audit = await _context.Audit.FindAsync(id);

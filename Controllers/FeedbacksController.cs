@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,12 +21,14 @@ namespace routine_explorer.Controllers
         }
 
         // GET: Feedbacks
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Feedback.ToListAsync());
         }
 
         // GET: Feedbacks/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +47,7 @@ namespace routine_explorer.Controllers
         }
 
         // GET: Feedbacks/Create
+        
         public IActionResult Create()
         {
             return View();
@@ -66,6 +70,7 @@ namespace routine_explorer.Controllers
         }
 
         // GET: Feedbacks/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +91,7 @@ namespace routine_explorer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,UserEmail,UserRating,Suggestion")] Feedback feedback)
         {
             if (id != feedback.Id)
@@ -117,6 +123,7 @@ namespace routine_explorer.Controllers
         }
 
         // GET: Feedbacks/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +144,7 @@ namespace routine_explorer.Controllers
         // POST: Feedbacks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var feedback = await _context.Feedback.FindAsync(id);
