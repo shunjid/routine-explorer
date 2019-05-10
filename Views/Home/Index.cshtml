@@ -15,9 +15,16 @@
         <form method="post" autocomplete="off" asp-action="StudentsRoutine" asp-controller="Routines" enctype="multipart/form-data">
             <div class="form-group">
                 <select class="form-control custom-select" id="selected" name="selected">
-                    @foreach (var item in Model)
+                    @try
                     {
-                    <option value=@item.Id>@Html.DisplayFor(modelItem => item.NameOfFilesUploaded)</option>
+                        @foreach (var item in Model)
+                        {
+                            <option value=@item.Id>@Html.DisplayFor(modelItem => item.NameOfFilesUploaded)</option>
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        <option value="">No Files Uploaded</option>
                     }
                 </select>
             </div>
@@ -63,9 +70,16 @@
         <form method="post" autocomplete="off" asp-action="TeachersRoutine" asp-controller="Routines" enctype="multipart/form-data">
             <div class="form-group">
                 <select class="form-control custom-select" id="selected" name="selected">
-                    @foreach (var item in Model)
+                    @try
                     {
-                    <option value=@item.Id>@Html.DisplayFor(modelItem => item.NameOfFilesUploaded)</option>
+                        @foreach (var item in Model)
+                        {
+                         <option value=@item.Id>@Html.DisplayFor(modelItem => item.NameOfFilesUploaded)</option>
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        <option value="">No Files Uploaded Yet</option>
                     }
                 </select>
             </div>

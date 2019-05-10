@@ -22,28 +22,35 @@ namespace routine_explorer.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            HttpClient http = new HttpClient();
-            var data = http.GetAsync("https://geoip-db.com/json/").Result.Content.ReadAsStringAsync().Result;
-            JObject objectData = JObject.Parse(data);
-            Audit audit = new Audit();
-            audit.UserIP = (string)objectData["IPv4"];
-            audit.UserLocation = (string)objectData["latitude"] + "," + (string)objectData["longitude"] + "," + (string)objectData["city"];
-            audit.AreaAccessed = "/Home/Index";
-            audit.ActionDateTime = DateTime.Now;
-            _context.Add(audit);
-            await _context.SaveChangesAsync();
-            _context.Remove(audit);
+            try
+            {
+                HttpClient http = new HttpClient();
+                var data = http.GetAsync("https://geoip-db.com/json/").Result.Content.ReadAsStringAsync().Result;
+                JObject objectData = JObject.Parse(data);
+                Audit audit = new Audit();
+                audit.UserIP = (string)objectData["IPv4"];
+                audit.UserLocation = (string)objectData["latitude"] + "," + (string)objectData["longitude"] + "," + (string)objectData["city"];
+                audit.AreaAccessed = "/Home/Index";
+                audit.ActionDateTime = DateTime.Now;
+                _context.Add(audit);
+                await _context.SaveChangesAsync();
+                _context.Remove(audit);
 
-            var lastAddedId = _context.RoutineFileUploaderStatus.OrderByDescending(p => p.TimeOfUpload).FirstOrDefault();
-            var courses = await _context.Routine
-            .OrderBy(n => n.CourseCode)
-            .Where(m => m.Status.Id == lastAddedId.Id)
-            .Where(x => !x.CourseCode.EndsWith("LAB1") && !x.CourseCode.EndsWith("LAB2") && !x.CourseCode.EndsWith("LAB"))
-            .Select(column => column.CourseCode)
-            .Distinct()
-            .ToListAsync();
-            ViewBag.CoursesJSON = courses;
-            return View(await _context.RoutineFileUploaderStatus.OrderByDescending(m => m.Id).ToListAsync());
+                var lastAddedId = _context.RoutineFileUploaderStatus.OrderByDescending(p => p.TimeOfUpload).FirstOrDefault();
+                var courses = await _context.Routine
+                .OrderBy(n => n.CourseCode)
+                .Where(m => m.Status.Id == lastAddedId.Id)
+                .Where(x => !x.CourseCode.EndsWith("LAB1") && !x.CourseCode.EndsWith("LAB2") && !x.CourseCode.EndsWith("LAB"))
+                .Select(column => column.CourseCode)
+                .Distinct()
+                .ToListAsync();
+                ViewBag.CoursesJSON = courses;
+                return View(await _context.RoutineFileUploaderStatus.OrderByDescending(m => m.Id).ToListAsync());
+            }
+            catch (System.Exception)
+            {
+                return View();
+            }
         }
 
         public IActionResult Privacy()
