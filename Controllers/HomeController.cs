@@ -44,7 +44,7 @@ namespace routine_explorer.Controllers
             .ToListAsync();
 
             ViewBag.CoursesJSON = courses;
-            return View(await _context.RoutineFileUploaderStatus.ToListAsync());
+            return View(await _context.RoutineFileUploaderStatus.OrderByDescending(m => m.Id).ToListAsync());
         }
 
         public IActionResult Privacy()
