@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -38,6 +39,23 @@ namespace routine_explorer
 
             services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlite(Configuration.GetConnectionString("ApplicationDbContextConnection")));
+
+            
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            .AddRazorPagesOptions(options =>
+            {
+                options.AllowAreas = true;
+                options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+                options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+            options.LoginPath = $"/Identity/Account/Login";
+            options.LogoutPath = $"/Identity/Account/Logout";
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
