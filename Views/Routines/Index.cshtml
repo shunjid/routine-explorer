@@ -19,47 +19,47 @@
     string[] courseString = new string[36];
     @foreach (var item in Model)
     {
-        if(item.DayOfWeek == "Saturday" && item.TimeRange == "08:30-10:00"){courseString[0] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Saturday" && item.TimeRange == "10:00-11:30"){courseString[1] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Saturday" && item.TimeRange == "11:30-01:00"){courseString[2] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Saturday" && item.TimeRange == "01:00-02:30"){courseString[3] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Saturday" && item.TimeRange == "02:30-04:00"){courseString[4] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Saturday" && item.TimeRange == "04:00-05:30"){courseString[5] = item.CourseCode+"\n";}
+        if(item.DayOfWeek == "Saturday" && item.TimeRange == "08:30-10:00"){courseString[0] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Saturday" && item.TimeRange == "10:00-11:30"){courseString[1] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Saturday" && item.TimeRange == "11:30-01:00"){courseString[2] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Saturday" && item.TimeRange == "01:00-02:30"){courseString[3] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Saturday" && item.TimeRange == "02:30-04:00"){courseString[4] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Saturday" && item.TimeRange == "04:00-05:30"){courseString[5] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
 
-        if(item.DayOfWeek == "Sunday" && item.TimeRange == "08:30-10:00"){courseString[6] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Sunday" && item.TimeRange == "10:00-11:30"){courseString[7] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Sunday" && item.TimeRange == "11:30-01:00"){courseString[8] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Sunday" && item.TimeRange == "01:00-02:30"){courseString[9] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Sunday" && item.TimeRange == "02:30-04:00"){courseString[10] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Sunday" && item.TimeRange == "04:00-05:30"){courseString[11] = item.CourseCode+"\n";}
+        if(item.DayOfWeek == "Sunday" && item.TimeRange == "08:30-10:00"){courseString[6] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Sunday" && item.TimeRange == "10:00-11:30"){courseString[7] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Sunday" && item.TimeRange == "11:30-01:00"){courseString[8] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Sunday" && item.TimeRange == "01:00-02:30"){courseString[9] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Sunday" && item.TimeRange == "02:30-04:00"){courseString[10] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Sunday" && item.TimeRange == "04:00-05:30"){courseString[11] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
 
-        if(item.DayOfWeek == "Monday" && item.TimeRange == "08:30-10:00"){courseString[12] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Monday" && item.TimeRange == "10:00-11:30"){courseString[13] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Monday" && item.TimeRange == "11:30-01:00"){courseString[14] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Monday" && item.TimeRange == "01:00-02:30"){courseString[15] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Monday" && item.TimeRange == "02:30-04:00"){courseString[16] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Monday" && item.TimeRange == "04:00-05:30"){courseString[17] = item.CourseCode+"\n";}
+        if(item.DayOfWeek == "Monday" && item.TimeRange == "08:30-10:00"){courseString[12] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Monday" && item.TimeRange == "10:00-11:30"){courseString[13] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Monday" && item.TimeRange == "11:30-01:00"){courseString[14] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Monday" && item.TimeRange == "01:00-02:30"){courseString[15] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Monday" && item.TimeRange == "02:30-04:00"){courseString[16] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Monday" && item.TimeRange == "04:00-05:30"){courseString[17] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
 
-        if(item.DayOfWeek == "Tuesday" && item.TimeRange == "08:30-10:00"){courseString[18] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Tuesday" && item.TimeRange == "10:00-11:30"){courseString[19] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Tuesday" && item.TimeRange == "11:30-01:00"){courseString[20] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Tuesday" && item.TimeRange == "01:00-02:30"){courseString[21] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Tuesday" && item.TimeRange == "02:30-04:00"){courseString[22] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Tuesday" && item.TimeRange == "04:00-05:30"){courseString[23] = item.CourseCode+"\n";}
+        if(item.DayOfWeek == "Tuesday" && item.TimeRange == "08:30-10:00"){courseString[18] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Tuesday" && item.TimeRange == "10:00-11:30"){courseString[19] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Tuesday" && item.TimeRange == "11:30-01:00"){courseString[20] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Tuesday" && item.TimeRange == "01:00-02:30"){courseString[21] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Tuesday" && item.TimeRange == "02:30-04:00"){courseString[22] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Tuesday" && item.TimeRange == "04:00-05:30"){courseString[23] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
 
-        if(item.DayOfWeek == "Wednesday" && item.TimeRange == "08:30-10:00"){courseString[24] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Wednesday" && item.TimeRange == "10:00-11:30"){courseString[25] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Wednesday" && item.TimeRange == "11:30-01:00"){courseString[26] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Wednesday" && item.TimeRange == "01:00-02:30"){courseString[27] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Wednesday" && item.TimeRange == "02:30-04:00"){courseString[28] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Wednesday" && item.TimeRange == "04:00-05:30"){courseString[29] = item.CourseCode+"\n";}
+        if(item.DayOfWeek == "Wednesday" && item.TimeRange == "08:30-10:00"){courseString[24] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Wednesday" && item.TimeRange == "10:00-11:30"){courseString[25] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Wednesday" && item.TimeRange == "11:30-01:00"){courseString[26] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Wednesday" && item.TimeRange == "01:00-02:30"){courseString[27] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Wednesday" && item.TimeRange == "02:30-04:00"){courseString[28] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Wednesday" && item.TimeRange == "04:00-05:30"){courseString[29] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
 
-        if(item.DayOfWeek == "Thursday" && item.TimeRange == "08:30-10:00"){courseString[30] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Thursday" && item.TimeRange == "10:00-11:30"){courseString[31] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Thursday" && item.TimeRange == "11:30-01:00"){courseString[32] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Thursday" && item.TimeRange == "01:00-02:30"){courseString[33] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Thursday" && item.TimeRange == "02:30-04:00"){courseString[34] = item.CourseCode+"\n";}
-        if(item.DayOfWeek == "Thursday" && item.TimeRange == "04:00-05:30"){courseString[35] = item.CourseCode+"\n";}
+        if(item.DayOfWeek == "Thursday" && item.TimeRange == "08:30-10:00"){courseString[30] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Thursday" && item.TimeRange == "10:00-11:30"){courseString[31] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Thursday" && item.TimeRange == "11:30-01:00"){courseString[32] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Thursday" && item.TimeRange == "01:00-02:30"){courseString[33] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Thursday" && item.TimeRange == "02:30-04:00"){courseString[34] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
+        if(item.DayOfWeek == "Thursday" && item.TimeRange == "04:00-05:30"){courseString[35] = item.CourseCode+"\n"+"("+item.RoomNumber+")\n";}
 
     }
 }
