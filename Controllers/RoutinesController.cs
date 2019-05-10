@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -30,6 +31,13 @@ namespace routine_explorer.Controllers
         // GET: Routines
         public async Task<IActionResult> Index()
         {
+            var currentArabicMonthIndex = new HijriCalendar();
+            if(currentArabicMonthIndex.GetMonth(DateTime.Now) == 9){
+                ViewBag.arabicMonth = "Ramadan";
+            }else{
+                ViewBag.arabicMonth = "Other";
+            }
+            
             return View(await _context.Routine.Where(m => m.Status.Id == 0).ToListAsync());
         }
 
@@ -53,6 +61,13 @@ namespace routine_explorer.Controllers
         [HttpPost]
         public async Task<IActionResult> StudentsRoutine(IFormCollection formFields)
         {
+            var currentArabicMonthIndex = new HijriCalendar();
+            if(currentArabicMonthIndex.GetMonth(DateTime.Now) == 9){
+                ViewBag.arabicMonth = "Ramadan";
+            }else{
+                ViewBag.arabicMonth = "Other";
+            }
+
             return View("Index", await _context.Routine
             .OrderBy(d => d.DayOfWeek)
             .Where(m => m.Status.Id == int.Parse(formFields["selected"]))
@@ -66,6 +81,13 @@ namespace routine_explorer.Controllers
 
         [HttpPost]
         public async Task<IActionResult> TeachersRoutine(IFormCollection formFields){
+            var currentArabicMonthIndex = new HijriCalendar();
+            if(currentArabicMonthIndex.GetMonth(DateTime.Now) == 9){
+                ViewBag.arabicMonth = "Ramadan";
+            }else{
+                ViewBag.arabicMonth = "Other";
+            }
+
             return View("Index", await _context.Routine
             .Where(m => m.Status.Id == int.Parse(formFields["selected"]))
             .Where(t => t.Teacher == formFields["teacherInitial"]

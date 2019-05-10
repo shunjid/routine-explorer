@@ -42,7 +42,6 @@ namespace routine_explorer.Controllers
             .Select(column => column.CourseCode)
             .Distinct()
             .ToListAsync();
-
             ViewBag.CoursesJSON = courses;
             return View(await _context.RoutineFileUploaderStatus.OrderByDescending(m => m.Id).ToListAsync());
         }
