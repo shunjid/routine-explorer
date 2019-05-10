@@ -59,18 +59,40 @@
         <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
         <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+        <script src="~/js/html2canvas.js"></script>
+        <script src="~/js/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
         <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+        <script src="~/js/html2canvas.js"></script>
+        <script src="~/js/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip()
         })
+    </script>
+    <script>
+                            function genPDF() {
+                                html2canvas(document.getElementById("HTMLtoPDF"), {
+                                    onrendered: function (canvas) {
+                                        var img = canvas.toDataURL("image/png");
+                                        var doc = new jsPDF('landscape');
+
+                                        doc.addImage(img, 'PNG', 0, 0, 1000, 1000);
+                                        doc.setFontSize(25);
+                                        
+                                        doc.save('Routine.pdf');
+                                    }
+                                }
+                                );
+                            }
     </script>
 
     @RenderSection("Scripts", required: false)
