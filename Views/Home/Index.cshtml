@@ -11,8 +11,13 @@
 
 
 <div class="row center">
-    <div class="col-md-12">
-        <form method="post" autocomplete="off" asp-action="Index" asp-controller="Routines" enctype="multipart/form-data">
+    <div class="col-md-8">
+        
+        <div class="text-center">
+            <h5 class="display-5">Students Routine</h5>
+        </div>
+        <hr/>
+        <form method="post" autocomplete="off" asp-action="StudentsRoutine" asp-controller="Routines" enctype="multipart/form-data">
             <div class="form-group">
                 <select class="form-control custom-select" id="selected" name="selected">
                     @foreach (var item in Model)
@@ -54,7 +59,35 @@
             </div>
         </form>
     </div>
+
+    <div class="col-md-4">
+        <div class="text-center">
+            <h5 class="display-5">Teachers Routine</h5>
+        </div>
+        <hr/>
+        <form method="post" autocomplete="off" asp-action="TeachersRoutine" asp-controller="Routines" enctype="multipart/form-data">
+            <div class="form-group">
+                <select class="form-control custom-select" id="selected" name="selected">
+                    @foreach (var item in Model)
+                    {
+                    <option value=@item.Id>@Html.DisplayFor(modelItem => item.NameOfFilesUploaded)</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+               <label for="teacherInitial">Teacher Initial</label>
+                <input type="text" class="form-control" id="teacherInitial" name="teacherInitial" placeholder="DTB">
+            </div>
+            
+            <div class="col-md-12 text-center">
+                    <div class="form-group">
+                    <input type="submit" value="Check Routine" class="btn btn-outline-primary" />  
+            </div>
+        </form>
+    </div>
 </div>
+
 
 
 @section Scripts {

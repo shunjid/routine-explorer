@@ -33,20 +33,6 @@ namespace routine_explorer.Controllers
             return View(await _context.Routine.Where(m => m.Status.Id == 0).ToListAsync());
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(IFormCollection formFields)
-        {
-            return View(await _context.Routine
-            .OrderBy(d => d.DayOfWeek)
-            .Where(m => m.Status.Id == int.Parse(formFields["selected"]))
-            .Where(x => x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject1"].ToString()))
-            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject2"].ToString()))
-            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject3"].ToString()))
-            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject4"].ToString()))
-            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject5"].ToString())))
-            .ToListAsync());
-        }
-
         private string sanitizeCourseCodeInput(string courseCode)
         {
             if (courseCode == "" || courseCode.Replace(" ", String.Empty) == "")
@@ -63,6 +49,28 @@ namespace routine_explorer.Controllers
                 return courseInside;
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> StudentsRoutine(IFormCollection formFields)
+        {
+            return View("Index", await _context.Routine
+            .OrderBy(d => d.DayOfWeek)
+            .Where(m => m.Status.Id == int.Parse(formFields["selected"]))
+            .Where(x => x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject1"].ToString()))
+            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject2"].ToString()))
+            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject3"].ToString()))
+            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject4"].ToString()))
+            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject5"].ToString())))
+            .ToListAsync());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TeachersRoutine(IFormCollection formFields){
+            return View("Index", await _context.Routine
+            .Where(m => m.Status.Id == int.Parse(formFields["selected"]))
+            .Where(t => t.Teacher == formFields["teacherInitial"]
+            .ToString().ToUpper().Replace(" ", String.Empty)).ToListAsync());
+        }   
 
         // GET: Routines/Details/5
         [Authorize]
@@ -121,9 +129,9 @@ namespace routine_explorer.Controllers
             audit.ActionDateTime = DateTime.Now;
 
             HashSet<Routine> routine = new HashSet<Routine>();
-            if (file == null || file.Length == 0 || !file.FileName.EndsWith("xlsx") || file.Length > 30000)
+            if (file == null || file.Length == 0 || !file.FileName.EndsWith("xlsx") || file.Length > 35000)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Create));
             }
 
             RoutineFileUploaderStatus routineFileUploaderStatus = new RoutineFileUploaderStatus();
@@ -218,9 +226,9 @@ namespace routine_explorer.Controllers
                 await _context.SaveChangesAsync();
                 ViewBag.Signal = "File Uploaded Successfully";
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                ViewBag.Signal = e.Message;
+                throw;
             }
             return RedirectToAction(nameof(Create));
         }
