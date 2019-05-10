@@ -17,7 +17,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color: #263238">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-clock"></i> Routine Explorer</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -26,15 +26,33 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
+                        <div class="btn-group">
+                        <li class="nav-item">
+                            <!-- Example single danger button -->
+                        
+                            <button type="button" class="btn text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             <i class="fas fa-rss"></i> Contact
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="https://facebook.com/shunjid" target="_blank"><i class="fab fa-facebook" style="color: #3b5998"></i>&nbsp; Facebook</a>
+                                <a class="dropdown-item" href="https://github.com/shunjid" target="_blank"><i class="fab fa-github"></i> &nbsp; GitHub</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="https://teamtigers.github.io/" target="_blank"><b>@@teamtigers</b></a>
+                            </div>
+                        
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-home fa-lg"></i> Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="/Feedbacks/Create"><i class="fas fa-comment-dots fa-lg"></i> Feedback</a>
                         </li>
+                        
                         <li class="nav-item">
                             <partial name="_LoginPartial" />
                         </li>
+                        </div>
                     </ul>
                 </div>
                 
@@ -50,7 +68,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2019 - routine_explorer - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2019 - Powered By <a target="_blank" href="https://github.com/TeamTigers" ><b>teamTigers</b></a>
         </div>
     </footer>
 
