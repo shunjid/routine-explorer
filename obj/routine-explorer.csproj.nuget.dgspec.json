@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/shunjid/Documents/web/dotnet/routine-explorer/routine-explorer.csproj": {}
+    "/home/shunjid/Documents/Development/DotnetCore/routine_explorer/routine-explorer.csproj": {}
   },
   "projects": {
-    "/home/shunjid/Documents/web/dotnet/routine-explorer/routine-explorer.csproj": {
+    "/home/shunjid/Documents/Development/DotnetCore/routine_explorer/routine-explorer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/shunjid/Documents/web/dotnet/routine-explorer/routine-explorer.csproj",
+        "projectUniqueName": "/home/shunjid/Documents/Development/DotnetCore/routine_explorer/routine-explorer.csproj",
         "projectName": "routine-explorer",
-        "projectPath": "/home/shunjid/Documents/web/dotnet/routine-explorer/routine-explorer.csproj",
+        "projectPath": "/home/shunjid/Documents/Development/DotnetCore/routine_explorer/routine-explorer.csproj",
         "packagesPath": "/home/shunjid/.nuget/packages/",
-        "outputPath": "/home/shunjid/Documents/web/dotnet/routine-explorer/obj/",
+        "outputPath": "/home/shunjid/Documents/Development/DotnetCore/routine_explorer/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/share/dotnet/sdk/NuGetFallbackFolder"
