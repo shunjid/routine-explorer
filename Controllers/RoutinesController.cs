@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OfficeOpenXml;
 using routine_explorer.Data;
@@ -95,7 +90,7 @@ namespace routine_explorer.Controllers
         }   
 
         // GET: Routines/Details/5
-        [Authorize]
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -114,7 +109,6 @@ namespace routine_explorer.Controllers
         }
 
         // GET: Routines/Create
-        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -125,7 +119,7 @@ namespace routine_explorer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        
         public async Task<IActionResult> Create([Bind("Id,RoomNumber,CourseCode,Teacher,DayOfWeek,TimeRange")] Routine routine)
         {
             if (ModelState.IsValid)
@@ -137,7 +131,7 @@ namespace routine_explorer.Controllers
             return View(routine);
         }
 
-        [Authorize]
+        
         public async Task<IActionResult> FileUpload(IFormFile file)
         {
             HttpClient http = new HttpClient();
@@ -269,7 +263,7 @@ namespace routine_explorer.Controllers
 
 
         // GET: Routines/Edit/5
-        [Authorize]
+        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -290,7 +284,7 @@ namespace routine_explorer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        
         public async Task<IActionResult> Edit(int id, [Bind("Id,RoomNumber,CourseCode,Teacher,DayOfWeek,TimeRange")] Routine routine)
         {
             if (id != routine.Id)
@@ -322,7 +316,7 @@ namespace routine_explorer.Controllers
         }
 
         // GET: Routines/Delete/5
-        [Authorize]
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -343,7 +337,7 @@ namespace routine_explorer.Controllers
         // POST: Routines/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var routine = await _context.Routine.FindAsync(id);
@@ -352,7 +346,7 @@ namespace routine_explorer.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [Authorize]
+        
         private bool RoutineExists(int id)
         {
             return _context.Routine.Any(e => e.Id == id);
