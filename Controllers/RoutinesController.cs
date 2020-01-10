@@ -27,62 +27,14 @@ namespace routine_explorer.Controllers
         public async Task<IActionResult> Index()
         {
             var currentArabicMonthIndex = new HijriCalendar();
-            if(currentArabicMonthIndex.GetMonth(DateTime.Now) == 9){
-                ViewBag.arabicMonth = "Ramadan";
-            }else{
-                ViewBag.arabicMonth = "Other";
-            }
-            
+            ViewBag.arabicMonth = currentArabicMonthIndex.GetMonth(DateTime.Now) == 9 ? "Ramadan" : "Other";
             return View(await _context.Routine.Where(m => m.Status.Id == 0).ToListAsync());
         }
-
-        private string sanitizeCourseCodeInput(string courseCode)
-        {
-            if (string.IsNullOrEmpty(courseCode) ||  courseCode == "" || courseCode.Replace(" ", string.Empty) == "")
-            {
-                return "nocourse";
-            }
-            if (courseCode.ToUpper().StartsWith("AOL"))
-            {
-                return "AOL";
-            }
-            else
-            {
-                string courseInside = courseCode.ToUpper().Replace(" ", String.Empty);
-                return courseInside;
-            }
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> StudentsRoutine(IFormCollection formFields)
-        {
-            var currentArabicMonthIndex = new HijriCalendar();
-            if(currentArabicMonthIndex.GetMonth(DateTime.Now) == 9){
-                ViewBag.arabicMonth = "Ramadan";
-            }else{
-                ViewBag.arabicMonth = "Other";
-            }
-
-            return View("Index", await _context.Routine
-            .OrderBy(d => d.DayOfWeek)
-            .Where(m => m.Status.Id == int.Parse(formFields["selected"]))
-            .Where(x => x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject1"].ToString()))
-            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject2"].ToString()))
-            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject3"].ToString()))
-            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject4"].ToString()))
-            || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject5"].ToString())))
-            .ToListAsync());
-        }
-        
 
         [HttpPost]
         public async Task<IActionResult> TeachersRoutine(IFormCollection formFields){
             var currentArabicMonthIndex = new HijriCalendar();
-            if(currentArabicMonthIndex.GetMonth(DateTime.Now) == 9){
-                ViewBag.arabicMonth = "Ramadan";
-            }else{
-                ViewBag.arabicMonth = "Other";
-            }
+            ViewBag.arabicMonth = currentArabicMonthIndex.GetMonth(DateTime.Now) == 9 ? "Ramadan" : "Other";
 
             return View("Index", await _context.Routine
             .Where(m => m.Status.Id == int.Parse(formFields["selected"]))
@@ -120,41 +72,42 @@ namespace routine_explorer.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
         public async Task<IActionResult> Create([Bind("Id,RoomNumber,CourseCode,Teacher,DayOfWeek,TimeRange")] Routine routine)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(routine);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(routine);
+            if (!ModelState.IsValid) return View(routine);
+            _context.Add(routine);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         
         public async Task<IActionResult> FileUpload(IFormFile file)
         {
-            HttpClient http = new HttpClient();
+            var http = new HttpClient();
             var data = http.GetAsync("https://geoip-db.com/json/").Result.Content.ReadAsStringAsync().Result;
-            JObject objectData = JObject.Parse(data);
+            var objectData = JObject.Parse(data);
 
-            Audit audit = new Audit();
-            audit.UserIP = (string)objectData["IPv4"];
-            audit.UserLocation = (string)objectData["latitude"] + "," + (string)objectData["longitude"] + "," + (string)objectData["city"];
-            audit.AreaAccessed = "/Create/FileUpload";
-            audit.ActionDateTime = DateTime.Now;
+            var audit = new Audit
+            {
+                UserIP = (string) objectData["IPv4"],
+                UserLocation = (string) objectData["latitude"] + "," + (string) objectData["longitude"] + "," +
+                               (string) objectData["city"],
+                AreaAccessed = "/Create/FileUpload",
+                ActionDateTime = DateTime.Now
+            };
 
-            HashSet<Routine> routine = new HashSet<Routine>();
+            var routine = new HashSet<Routine>();
             if (file == null || file.Length == 0 || !file.FileName.EndsWith("xlsx") || file.Length > 35000)
             {
                 return RedirectToAction(nameof(Create));
             }
 
-            RoutineFileUploaderStatus routineFileUploaderStatus = new RoutineFileUploaderStatus();
-            routineFileUploaderStatus.NameOfFilesUploaded = file.FileName.Replace(".xlsx", "");
-            routineFileUploaderStatus.statusOfPublish = true;
-            routineFileUploaderStatus.TimeOfUpload = DateTime.Now;
+            var routineFileUploaderStatus = new RoutineFileUploaderStatus
+            {
+                NameOfFilesUploaded = file.FileName.Replace(".xlsx", ""),
+                statusOfPublish = true,
+                TimeOfUpload = DateTime.Now
+            };
 
             var lastAddedId = _context.RoutineFileUploaderStatus.OrderByDescending(p => p.TimeOfUpload).FirstOrDefault();
 

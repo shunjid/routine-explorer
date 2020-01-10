@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - Routine Explorer</title>
-
+    <link rel="icon" href="https://bitsofco.de/favicon.png" type="image/gif" sizes="16x16">
     <!-- Fonts & Icons Required To Enhance The Look -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -29,24 +29,36 @@
     <nav class="nav-extended nav-fixed white">
         <div class="nav-wrapper">
             <a class="brand-logo grey-text text-darken-3" id="page-logo">
-                <i class="material-icons teal-text text-darken-1" id="page-logo-icon">brightness_7</i> &nbsp; RE
+                <i class="material-icons blue-text text-darken-1" id="page-logo-icon">brightness_7</i> &nbsp; RE
             </a>
             <a href="#" class="sidenav-trigger" data-target="mobile-nav">
                 <i class="material-icons grey-text text-darken-4">menu</i>
             </a>
+            
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <a class='dropdown-trigger grey-text text-darken-4' href='#' data-target='dropdown1'>
+                    <i class="material-icons left grey-text text-darken-2">arrow_drop_down</i> More
+                </a>
+                
+                <!-- Dropdown Structure -->
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li><a class="grey-text text-darken-3" href="https://github.com/shunjid/routine-explorer"><i class="material-icons cyan-text text-darken-3">code</i>GitHub</a></li>
+                    <li><a class="grey-text text-darken-3" asp-action="Create" asp-controller="Routines"><i class="material-icons cyan-text text-darken-3">cloud_upload</i>Upload</a></li>
+                </ul>
+            </ul>
         </div>
     </nav>
     <ul class="sidenav yellow-text text-darken-3" id="mobile-nav">
         <li>
-            <a target="_blank" class="title" href="https://github.com/e-Luminous/ui">
+            <a target="_blank" class="title" href="https://github.com/shunjid/routine-explorer">
                 <i class="fab fa-github grey-text"></i> GitHub
             </a>
         </li>
     </ul>
 </header>
 
-<div id="load" class="progress light-teal lighten-3">
-    <div class="indeterminate teal"></div>
+<div id="load" class="progress light-blue lighten-4">
+    <div class="indeterminate blue darken-2"></div>
 </div>
 
 <div id="contents">

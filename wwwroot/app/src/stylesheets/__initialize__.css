@@ -13,6 +13,10 @@ label {
     font-family: 'Product Sans', monospace;
 }
 
+span {
+    font-family: 'Google Sans', monospace;
+}
+
 #page-logo-icon{
     margin-right: 1px;
 }
