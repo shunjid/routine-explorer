@@ -31,6 +31,7 @@ $(document).ready(function() {
                     placesToWriteData = replaceAll(placesToWriteData, ':', '\\:');
                     $('#'+placesToWriteData).html(element['courseCode'] + '<br>' + '(' + element["roomNumber"] + ')' + ' - ' + element["teacher"]);
                 });
+                $('#semesterName').text('Class Schedule : ' + response[0]["status"]["nameOfFilesUploaded"]);
                 $('#modal1').modal('open');
             }
         }).always(function() {
