@@ -4,118 +4,151 @@
     ViewData["Title"] = "SWE Routine";
 }
 
-
-<div class="row center">
-    <div class="col-md-8">
-        
-        <div class="text-center">
-            <h5 class="display-5"><i class="fas fa-user-graduate"></i> Students Routine</h5>
+<div class="row">
+    <div class="col s12 l12">
+        <div class="card hoverable">
+            <div class="card-content">
+                <span class="card-title center-align">Find your class schedule</span>
+                <form id="formStudentRoutine">
+                    <div class="row input-field col s12 l12">
+                        <select id="SelectedRoutineId" name="SelectedRoutineId">
+                            @try
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <option value=@item.Id>@Html.DisplayFor(modelItem => item.NameOfFilesUploaded)</option>
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                <option value="">No Files Uploaded</option>
+                            }
+                        </select>
+                        <label>Select a routine version</label>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6 l6">
+                            <input placeholder="SWE321A" id="FirstSubject" name="FirstSubject" type="text">
+                            <label for="FirstSubject">Course Code 01</label>
+                        </div>
+                        <div class="input-field col s6 l6">
+                            <input placeholder="SWE321A" id="SecondSubject" name="SecondSubject" type="text">
+                            <label for="SecondSubject">Course Code 02</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6 l6">
+                            <input placeholder="SWE321A" id="ThirdSubject" name="ThirdSubject" type="text">
+                            <label for="ThirdSubject">Course Code 03</label>
+                        </div>
+                        <div class="input-field col s6 l6">
+                            <input placeholder="SWE321A" id="FourthSubject" name="FourthSubject" type="text">
+                            <label for="FourthSubject">Course Code 04</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 l12">
+                            <input placeholder="SWE321A" id="FifthSubject" name="FifthSubject" type="text">
+                            <label for="FifthSubject">Course Code 05</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="center-align">
+                            <a id="btnStudentRoutine" class="waves-effect waves-light btn"><i class="material-icons left">school</i>Check Routine</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
         </div>
-        <hr/>
-        <form method="post" autocomplete="off" asp-action="StudentsRoutine" asp-controller="Routines" enctype="multipart/form-data">
-            <div class="form-group">
-                <select class="form-control custom-select" id="selected" name="selected">
-                    @try
-                    {
-                        @foreach (var item in Model)
-                        {
-                            <option value=@item.Id>@Html.DisplayFor(modelItem => item.NameOfFilesUploaded)</option>
-                        }
-                    }
-                    catch (System.Exception)
-                    {
-                        <option value="">No Files Uploaded</option>
-                    }
-                </select>
-            </div>
-
-            <div class="form-group">
-               <label for="subject1">Subject Code 1</label>
-                <input type="text" class="form-control" id="subject1" name="subject1" placeholder="SWEXXXA">
-            </div>
-
-            <div class="form-group">
-               <label for="subject2">Subject Code 2</label>
-                <input type="text" class="form-control" id="subject2" name="subject2" placeholder="SWEXXXA">
-            </div>
-
-            <div class="form-group">
-               <label for="subject3">Subject Code 3</label>
-                <input type="text" class="form-control" id="subject3" name="subject3" placeholder="SWEXXXA">
-            </div>
-
-            <div class="form-group">
-               <label for="subject4">Subject Code 4</label>
-                <input type="text" class="form-control" id="subject4" name="subject4" placeholder="SWEXXXA">
-            </div>
-
-            <div class="form-group">
-               <label for="subject5">Subject Code 5</label>
-                <input type="text" class="form-control" id="subject5" name="subject5" placeholder="SWEXXXA">
-            </div>
-            
-            <div class="col-md-12 text-center">
-                    <div class="form-group">
-                    <input type="submit" value="Check Routine" class="btn btn-raised btn-primary" />  
-            </div>
-            </div>
-        </form>
-    </div>
-
-    <div class="col-md-4">
-        <div class="text-center">
-            <h5 class="display-5"><i class="fas fa-chalkboard-teacher"></i> Teachers Routine</h5>
-        </div>
-        <hr/>
-        <form method="post" autocomplete="off" asp-action="TeachersRoutine" asp-controller="Routines" enctype="multipart/form-data">
-            <div class="form-group">
-                <select class="form-control custom-select" id="selected" name="selected">
-                    @try
-                    {
-                        @foreach (var item in Model)
-                        {
-                         <option value=@item.Id>@Html.DisplayFor(modelItem => item.NameOfFilesUploaded)</option>
-                        }
-                    }
-                    catch (System.Exception)
-                    {
-                        <option value="">No Files Uploaded Yet</option>
-                    }
-                </select>
-            </div>
-
-            <div class="form-group">
-               <label for="teacherInitial">Teacher Initial</label>
-                <input type="text" class="form-control" id="teacherInitial" name="teacherInitial" placeholder="DTB">
-            </div>
-            
-            <div class="col-md-12 text-center">
-                <div class="form-group">
-                    <input type="submit" value="Check Routine" class="btn btn-raised btn-primary" />  
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="card">
-                 <div class="card-body">
-                     <h5 class="card-title text-justify"><i class="fas fa-code"></i> About</h5>
-                    <p class="card-text text-justify">This is a general purpose application built for the students and teacher of the Department of Software Engineering, Daffodil International University to view their class schedule of every semester. This application is build with <b>.NET Core 2.2 MVC</b>. If you want to contribute to this project, then follow this link below.</p>
-                    <a href="https://github.com/shunjid/routine-explorer" target="_blank" class="btn btn-raised btn-primary"><i class="fab fa-github"></i> Repository in GitHub</a> 
-                </div>
-                </div>
-            </div>
-        </form>
     </div>
 </div>
 
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Class Schedule</h4>
+        <table class="table responsive-table">
+            <thead>
+            <tr>
+                <th class="teal-text text-darken-3">Day/Time</th>
+                <th class="">08:30-10:00</th>
+                <th class="">10:00-11:30</th>
+                <th class="">11:30-01:00</th>
+                <th class="">01:00-02:30</th>
+                <th class="">02:30-04:00</th>
+                <th class="">04:00-05:30</th>
+            </tr>
+            </thead>
 
+            <tbody>
+            <tr>
+                <td class="">Saturday</td>
+                <td class="routineData" id="Saturday08:30-10:00"></td>
+                <td class="routineData" id="Saturday10:00-11:30"></td>
+                <td class="routineData" id="Saturday11:30-01:00"></td>
+                <td class="routineData" id="Saturday01:00-02:30"></td>
+                <td class="routineData" id="Saturday02:30-04:00"></td>
+                <td class="routineData" id="Saturday04:00-05:30"></td>
+            </tr>
+
+            <tr>
+                <td class="">Sunday</td>
+                <td class="routineData" id="Sunday08:30-10:00"></td>
+                <td class="routineData" id="Sunday10:00-11:30"></td>
+                <td class="routineData" id="Sunday11:30-01:00"></td>
+                <td class="routineData" id="Sunday01:00-02:30"></td>
+                <td class="routineData" id="Sunday02:30-04:00"></td>
+                <td class="routineData" id="Sunday04:00-05:30"></td>
+            </tr>
+
+            <tr>
+                <td class="">Monday</td>
+                <td class="routineData" id="Monday08:30-10:00"></td>
+                <td class="routineData" id="Monday10:00-11:30"></td>
+                <td class="routineData" id="Monday11:30-01:00"></td>
+                <td class="routineData" id="Monday01:00-02:30"></td>
+                <td class="routineData" id="Monday02:30-04:00"></td>
+                <td class="routineData" id="Monday04:00-05:30"></td>
+            </tr>
+
+            <tr>
+                <td class="">Tuesday</td>
+                <td class="routineData" id="Tuesday08:30-10:00"></td>
+                <td class="routineData" id="Tuesday10:00-11:30"></td>
+                <td class="routineData" id="Tuesday11:30-01:00"></td>
+                <td class="routineData" id="Tuesday01:00-02:30"></td>
+                <td class="routineData" id="Tuesday02:30-04:00"></td>
+                <td class="routineData" id="Tuesday04:00-05:30"></td>
+            </tr>
+
+            <tr>
+                <td class="">Wednesday</td>
+                <td class="routineData" id="Wednesday08:30-10:00"></td>
+                <td class="routineData" id="Wednesday10:00-11:30"></td>
+                <td class="routineData" id="Wednesday11:30-01:00"></td>
+                <td class="routineData" id="Wednesday01:00-02:30"></td>
+                <td class="routineData" id="Wednesday02:30-04:00"></td>
+                <td class="routineData" id="Wednesday04:00-05:30"></td>
+            </tr>
+
+            <tr>
+                <td class="">Thursday</td>
+                <td class="routineData" id="Thursday08:30-10:00"></td>
+                <td class="routineData" id="Thursday10:00-11:30"></td>
+                <td class="routineData" id="Thursday11:30-01:00"></td>
+                <td class="routineData" id="Thursday01:00-02:30"></td>
+                <td class="routineData" id="Thursday02:30-04:00"></td>
+                <td class="routineData" id="Thursday04:00-05:30">3</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationAutoComplete");}
+    @{
+        await Html.RenderPartialAsync("RoutineSanitizer");
+    }
 }
-
-
-
-
-
-

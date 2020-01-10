@@ -1,113 +1,72 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Explorer</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - Routine Explorer</title>
 
+    <!-- Fonts & Icons Required To Enhance The Look -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Product+Sans:400&amp;lang=en" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500&amp;lang=en" rel="stylesheet">
+
+    <!-- Stylesheets that are going to work in Development Environment -->
     <environment include="Development">
-        <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+        <link rel="stylesheet" href="~/app/lib/stylesheets/materialize.css">
+        <link rel="stylesheet" href="~/app/src/stylesheets/__initialize__.css">
     </environment>
+
+    <!-- Stylesheets that are going to work in Non-Development Environment -->
     <environment exclude="Development">
-        <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+        <link rel="stylesheet" href="~/app/lib/stylesheets/materialize.min.css">
+        <link rel="stylesheet" href="~/app/src/stylesheets/__initialize__.css">
     </environment>
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="shortcut icon" href="~/images/favicon.png" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color: #263238">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-clock"></i> Routine Explorer</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <div class="btn-group">
-                        <li class="nav-item">
-                            <!-- Example single danger button -->
-                        
-                            <button type="button" class="btn text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             <i class="fas fa-rss"></i> Contact
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="https://facebook.com/shunjid" target="_blank"><i class="fab fa-facebook" style="color: #3b5998"></i>&nbsp; Facebook</a>
-                                <a class="dropdown-item" href="https://github.com/shunjid" target="_blank"><i class="fab fa-github"></i> &nbsp; GitHub</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="https://teamtigers.github.io/" target="_blank"><b>@@teamtigers</b></a>
-                            </div>
-                        
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index"> <i class="fas fa-home fa-lg"></i> Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="/Feedbacks/Create"><i class="fas fa-comment-dots fa-lg"></i> Feedback</a>
-                        </li>
-                        </div>
-                    </ul>
-                </div>
-                
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - Powered By <a target="_blank" href="https://github.com/TeamTigers" ><b>teamTigers</b></a>
+<header>
+    <nav class="nav-extended nav-fixed white">
+        <div class="nav-wrapper">
+            <a class="brand-logo grey-text text-darken-3" id="page-logo">
+                <i class="material-icons teal-text text-darken-1" id="page-logo-icon">brightness_7</i> &nbsp; RE
+            </a>
+            <a href="#" class="sidenav-trigger" data-target="mobile-nav">
+                <i class="material-icons grey-text text-darken-4">menu</i>
+            </a>
         </div>
-    </footer>
+    </nav>
+    <ul class="sidenav yellow-text text-darken-3" id="mobile-nav">
+        <li>
+            <a target="_blank" class="title" href="https://github.com/e-Luminous/ui">
+                <i class="fab fa-github grey-text"></i> GitHub
+            </a>
+        </li>
+    </ul>
+</header>
 
-    <environment include="Development">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-        <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
-        <script src="~/js/html2canvas.js"></script>
-        <script src="~/js/html2canvas.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
-        <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
-        <script src="~/js/html2canvas.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js" integrity="sha384-THVO/sM0mFD9h7dfSndI6TS0PgAGavwKvB5hAxRRvc0o9cPLohB0wb/PTA7LdUHs" crossorigin="anonymous"></script>
-    </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script>
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
-    </script>
-    <script>
-        function genPDF() {
-            html2canvas(document.getElementById("HTMLtoPDF"), {
-                onrendered: function (canvas) {
-                    var img = canvas.toDataURL("image/png");
-                    var doc = new jsPDF('landscape');
+<div id="load" class="progress light-teal lighten-3">
+    <div class="indeterminate teal"></div>
+</div>
 
-                    doc.addImage(img, 'PNG', 0, 0, 1000, 1000);
-                    doc.setFontSize(25);
+<div id="contents">
+    @RenderBody()
+</div>
 
-                    doc.save('Routine.pdf');
-                }
-            }
-            );
-        }
-    </script>
+<!-- Scripts that are going to work in Development Environment -->
+<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/app/lib/scripts/materialize.js"></script>
+    <script src="~/app/src/scripts/__initialize___.js"></script>
+</environment>
 
-    @RenderSection("Scripts", required: false)
+<!-- Scripts that are going to work in Non-Development Environment -->
+<environment exclude="Development">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/app/lib/scripts/materialize.min.js"></script>
+    <script src="~/app/src/scripts/__initialize___.js"></script>
+</environment>
+
+@RenderSection("Scripts", required: false)
 </body>
 </html>

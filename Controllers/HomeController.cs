@@ -67,8 +67,8 @@ namespace routine_explorer.Controllers
         }
         
         // API : GetStudentsRoutine
-        [HttpGet]
-        public async Task<JsonResult> GetStudentsRoutine([FromBody]Course courses)
+        [HttpPost]
+        public async Task<JsonResult> Index(Course courses)
         {
             try
             {
