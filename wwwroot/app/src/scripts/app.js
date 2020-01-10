@@ -11,6 +11,7 @@ $(document).ready(function() {
     
     
     $('#btnStudentRoutine').click(function () {
+        $('.progress').show();
         clearCache();
         let courses = {
             "selectedRoutineId": $('#SelectedRoutineId').val(),
@@ -32,6 +33,8 @@ $(document).ready(function() {
                 });
                 $('#modal1').modal('open');
             }
+        }).always(function() {
+            $('.progress').hide();
         });
         
     });
