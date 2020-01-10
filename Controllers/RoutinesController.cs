@@ -38,7 +38,7 @@ namespace routine_explorer.Controllers
 
         private string sanitizeCourseCodeInput(string courseCode)
         {
-            if (courseCode == "" || courseCode.Replace(" ", String.Empty) == "")
+            if (string.IsNullOrEmpty(courseCode) ||  courseCode == "" || courseCode.Replace(" ", string.Empty) == "")
             {
                 return "nocourse";
             }
@@ -50,6 +50,48 @@ namespace routine_explorer.Controllers
             {
                 string courseInside = courseCode.ToUpper().Replace(" ", String.Empty);
                 return courseInside;
+            }
+        }
+        
+        // API : Routines/GetStudentsRoutine
+        [HttpGet]
+        public async Task<JsonResult> GetStudentsRoutine([FromBody]Course courses)
+        {
+            try
+            {
+                var filteredCourse = new Course
+                {
+                    SelectedRoutineId = courses.SelectedRoutineId,
+                    FirstSubject = sanitizeCourseCodeInput(courses.FirstSubject),
+                    SecondSubject = sanitizeCourseCodeInput(courses.SecondSubject),
+                    ThirdSubject = sanitizeCourseCodeInput(courses.ThirdSubject),
+                    FourthSubject = sanitizeCourseCodeInput(courses.FourthSubject),
+                    FifthSubject = sanitizeCourseCodeInput(courses.FifthSubject)
+                };
+                
+                
+                var allSchedulesOfSelectedRoutine = await 
+                    _context.Routine
+                        .Where(r => r.Status.Id == courses.SelectedRoutineId)
+                        .OrderBy(d => d.Id)
+                        .Where(x 
+                            => x.CourseCode.StartsWith(filteredCourse.FirstSubject) 
+                               || x.CourseCode.StartsWith(filteredCourse.SecondSubject)
+                               || x.CourseCode.StartsWith(filteredCourse.ThirdSubject)
+                               || x.CourseCode.StartsWith(filteredCourse.FourthSubject)
+                               || x.CourseCode.StartsWith(filteredCourse.FifthSubject))
+                        .Include(r => r.Status)    
+                    .ToListAsync();
+                
+                return Json(allSchedulesOfSelectedRoutine);
+            }
+            catch (Exception e)
+            {
+                return Json(new Failure
+                {
+                    FailureMessage = e.Message,
+                    FailureStackTrace = e.StackTrace
+                });
             }
         }
 
@@ -73,6 +115,7 @@ namespace routine_explorer.Controllers
             || x.CourseCode.StartsWith(sanitizeCourseCodeInput(formFields["subject5"].ToString())))
             .ToListAsync());
         }
+        
 
         [HttpPost]
         public async Task<IActionResult> TeachersRoutine(IFormCollection formFields){

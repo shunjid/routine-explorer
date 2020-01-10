@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
@@ -47,9 +45,66 @@ namespace routine_explorer.Controllers
                 ViewBag.CoursesJSON = courses;
                 return View(await _context.RoutineFileUploaderStatus.OrderByDescending(m => m.Id).ToListAsync());
             }
-            catch (System.Exception)
+            catch (Exception)
             {
                 return View();
+            }
+        }
+        
+        private static string SanitizeCourseCodeInput(string courseCode)
+        {
+            if (string.IsNullOrEmpty(courseCode) ||  courseCode == "" || courseCode.Replace(" ", string.Empty) == "")
+            {
+                return "nocourse";
+            }
+            if (courseCode.ToUpper().StartsWith("AOL"))
+            {
+                return "AOL";
+            }
+
+            var courseInside = courseCode.ToUpper().Replace(" ", string.Empty);
+            return courseInside;
+        }
+        
+        // API : GetStudentsRoutine
+        [HttpGet]
+        public async Task<JsonResult> GetStudentsRoutine([FromBody]Course courses)
+        {
+            try
+            {
+                var filteredCourse = new Course
+                {
+                    SelectedRoutineId = courses.SelectedRoutineId,
+                    FirstSubject = SanitizeCourseCodeInput(courses.FirstSubject),
+                    SecondSubject = SanitizeCourseCodeInput(courses.SecondSubject),
+                    ThirdSubject = SanitizeCourseCodeInput(courses.ThirdSubject),
+                    FourthSubject = SanitizeCourseCodeInput(courses.FourthSubject),
+                    FifthSubject = SanitizeCourseCodeInput(courses.FifthSubject)
+                };
+                
+                
+                var allSchedulesOfSelectedRoutine = await 
+                    _context.Routine
+                        .Where(r => r.Status.Id == courses.SelectedRoutineId)
+                        .OrderBy(d => d.Id)
+                        .Where(x 
+                            => x.CourseCode.StartsWith(filteredCourse.FirstSubject) 
+                               || x.CourseCode.StartsWith(filteredCourse.SecondSubject)
+                               || x.CourseCode.StartsWith(filteredCourse.ThirdSubject)
+                               || x.CourseCode.StartsWith(filteredCourse.FourthSubject)
+                               || x.CourseCode.StartsWith(filteredCourse.FifthSubject))
+                        .Include(r => r.Status)    
+                    .ToListAsync();
+                
+                return Json(allSchedulesOfSelectedRoutine);
+            }
+            catch (Exception e)
+            {
+                return Json(new Failure
+                {
+                    FailureMessage = e.Message,
+                    FailureStackTrace = e.StackTrace
+                });
             }
         }
 

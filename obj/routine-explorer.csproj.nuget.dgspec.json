@@ -14,7 +14,7 @@
         "outputPath": "/home/shunjid/Documents/routine-explorer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/shunjid/.nuget/NuGet/NuGet.Config"
+          "/home/shunjid/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.0"
