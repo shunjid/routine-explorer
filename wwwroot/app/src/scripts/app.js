@@ -11,7 +11,6 @@ $(document).ready(function() {
     
     
     $('#btnStudentRoutine').click(function () {
-        $('#modal1').modal('open');
         clearCache();
         let courses = {
             "selectedRoutineId": $('#SelectedRoutineId').val(),
@@ -24,13 +23,14 @@ $(document).ready(function() {
         
         $.post('', { courses : courses }, function (response) {
             if(response.length === 0) {
-                showMaterialToast('Classes not found', 'red darken-1');
+                showMaterialToast('Provide at least a course', 'red darken-1');
             } else {
                 response.forEach(function (element) {
                     let placesToWriteData = element["dayOfWeek"] + element["timeRange"];
                     placesToWriteData = replaceAll(placesToWriteData, ':', '\\:');
                     $('#'+placesToWriteData).html(element['courseCode'] + '<br>' + '(' + element["roomNumber"] + ')' + ' - ' + element["teacher"]);
                 });
+                $('#modal1').modal('open');
             }
         });
         

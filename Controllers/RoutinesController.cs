@@ -200,7 +200,7 @@ namespace routine_explorer.Controllers
             {
                 throw;
             }
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction("Index", "Home");
         }
 
         private string getTimeStamp(string[] arr, int cellValue)

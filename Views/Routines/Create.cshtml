@@ -8,10 +8,20 @@
 <div class="row">
     <div class="col-md-12">
         <fieldset style="margin-top: 15px">
-            <legend>Upload an xlsx file</legend>
             <form method="post" asp-action="FileUpload" asp-controller="Routines" enctype="multipart/form-data">
-                <input type="file" name="file" onchange="ValidateSingleInput(this)" />
-                <input type="submit" value="Upload" />
+                <div class="file-field input-field">
+                  <div class="btn blue darken-3">
+                    <span>File</span>
+                    <input type="file" name="file" onchange="ValidateSingleInput(this)"/>
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                  </div>
+                </div>
+                
+                <p class="center-align">
+                    <input class="btn btn-small pink darken-3" type="submit" value="Upload"/>
+                </p>
             </form>
         </fieldset>
     </div>
