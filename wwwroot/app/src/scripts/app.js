@@ -1,4 +1,15 @@
 $(document).ready(function() {
+    $.get('Home/GetLatestCodes', function (response) {
+        // Course array to single object with null values for image in suggestion
+        $('.inputCourse').autocomplete({
+            data: response.reduce(function(acc, curr) {
+                acc[curr] = null;
+                return acc;
+            }, {})
+        });
+    });
+    
+    
     $('#btnStudentRoutine').click(function () {
         $('#modal1').modal('open');
         clearCache();

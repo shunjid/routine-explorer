@@ -22,27 +22,21 @@ namespace routine_explorer.Controllers
         {
             try
             {
-                HttpClient http = new HttpClient();
+                var http = new HttpClient();
                 var data = http.GetAsync("https://geoip-db.com/json/").Result.Content.ReadAsStringAsync().Result;
-                JObject objectData = JObject.Parse(data);
-                Audit audit = new Audit();
-                audit.UserIP = (string)objectData["IPv4"];
-                audit.UserLocation = (string)objectData["latitude"] + "," + (string)objectData["longitude"] + "," + (string)objectData["city"];
-                audit.AreaAccessed = "/Home/Index";
-                audit.ActionDateTime = DateTime.Now;
+                var objectData = JObject.Parse(data);
+                var audit = new Audit
+                {
+                    UserIP = (string) objectData["IPv4"],
+                    UserLocation = (string) objectData["latitude"] + "," + (string) objectData["longitude"] + "," +
+                                   (string) objectData["city"],
+                    AreaAccessed = "/Home/Index",
+                    ActionDateTime = DateTime.Now
+                };
                 _context.Add(audit);
                 await _context.SaveChangesAsync();
                 _context.Remove(audit);
-
-                var lastAddedId = _context.RoutineFileUploaderStatus.OrderByDescending(p => p.TimeOfUpload).FirstOrDefault();
-                var courses = await _context.Routine
-                .OrderBy(n => n.CourseCode)
-                .Where(m => m.Status.Id == lastAddedId.Id)
-                .Where(x => !x.CourseCode.EndsWith("LAB1") && !x.CourseCode.EndsWith("LAB2") && !x.CourseCode.EndsWith("LAB"))
-                .Select(column => column.CourseCode)
-                .Distinct()
-                .ToListAsync();
-                ViewBag.CoursesJSON = courses;
+                
                 return View(await _context.RoutineFileUploaderStatus.OrderByDescending(m => m.Id).ToListAsync());
             }
             catch (Exception)
@@ -55,7 +49,7 @@ namespace routine_explorer.Controllers
         {
             if (string.IsNullOrEmpty(courseCode) ||  courseCode == "" || courseCode.Replace(" ", string.Empty) == "")
             {
-                return "nocourse";
+                return "no course";
             }
             if (courseCode.ToUpper().StartsWith("AOL"))
             {
@@ -108,6 +102,20 @@ namespace routine_explorer.Controllers
             }
         }
 
+        public async Task<JsonResult> GetLatestCodes()
+        {
+            var lastAddedId = _context.RoutineFileUploaderStatus.OrderByDescending(p => p.TimeOfUpload).FirstOrDefault();
+            var courses = await _context.Routine
+                .OrderBy(n => n.CourseCode)
+                .Where(m => m.Status.Id == lastAddedId.Id)
+                .Where(x => !x.CourseCode.EndsWith("LAB1") && !x.CourseCode.EndsWith("LAB2") && !x.CourseCode.EndsWith("LAB"))
+                .Select(column => column.CourseCode)
+                .Distinct()
+                .ToListAsync();
+
+            return Json(courses);
+        }
+        
         public IActionResult Privacy()
         {
             return View();
