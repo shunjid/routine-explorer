@@ -23,7 +23,7 @@ namespace routine_explorer
         {
             services.AddControllersWithViews();
             
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("ApplicationDbContextConnection")));
