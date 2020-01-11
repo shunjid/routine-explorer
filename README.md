@@ -1,4 +1,4 @@
-# Routine Explorer, v2.0
+# Routine Explorer, v2.1
 
 ![Docker Build](https://img.shields.io/docker/cloud/build/shunjid/routine-explorer)  ![action badge](https://action-badges.now.sh/shunjid/routine-explorer)
 
