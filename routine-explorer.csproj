@@ -25,6 +25,16 @@
     <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewImports.cshtml" />
     <_ContentIncludedByDefault Remove="Areas\Identity\Pages\_ViewStart.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Feedbacks\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Feedbacks\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Feedbacks\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Feedbacks\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Feedbacks\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\RoutineFileUploaderStatuses\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\RoutineFileUploaderStatuses\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\RoutineFileUploaderStatuses\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\RoutineFileUploaderStatuses\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\RoutineFileUploaderStatuses\Index.cshtml" />
   </ItemGroup>
 
 </Project>

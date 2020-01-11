@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
 using routine_explorer.Data;
 using routine_explorer.Models;
 
@@ -22,21 +20,6 @@ namespace routine_explorer.Controllers
         {
             try
             {
-                var http = new HttpClient();
-                var data = http.GetAsync("https://geoip-db.com/json/").Result.Content.ReadAsStringAsync().Result;
-                var objectData = JObject.Parse(data);
-                var audit = new Audit
-                {
-                    UserIP = (string) objectData["IPv4"],
-                    UserLocation = (string) objectData["latitude"] + "," + (string) objectData["longitude"] + "," +
-                                   (string) objectData["city"],
-                    AreaAccessed = "/Home/Index",
-                    ActionDateTime = DateTime.Now
-                };
-                _context.Add(audit);
-                await _context.SaveChangesAsync();
-                _context.Remove(audit);
-                
                 return View(await _context.RoutineFileUploaderStatus.OrderByDescending(m => m.Id).ToListAsync());
             }
             catch (Exception)
@@ -114,11 +97,6 @@ namespace routine_explorer.Controllers
                 .ToListAsync();
 
             return Json(courses);
-        }
-        
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
