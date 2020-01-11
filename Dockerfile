@@ -1,16 +1,12 @@
-FROM microsoft/dotnet:3.1-sdk AS build-env
+FROM microsoft/dotnet:latest
+COPY . /app
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
-COPY *.csproj ./
 RUN dotnet restore
+RUN dotnet build
 
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c Release -o out
+EXPOSE 5000/tcp
+ENV ASPNETCORE_URLS http://*:5000
+ENV ASPNETCORE_ENVIRONMENT docker
 
-# Build runtime image
-FROM microsoft/dotnet:3.1-aspnetcore-runtime
-WORKDIR /app
-COPY --from=build-env /app/out .
-CMD dotnet routine-explorer.dll
+ENTRYPOINT [ "dotnet", "watch", "run", "--no-restore", "--urls", "http://0.0.0.0:5000" ]
