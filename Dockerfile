@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:latest
+FROM microsoft/dotnet:3.1-sdk
 COPY . /app
 WORKDIR /app
 
