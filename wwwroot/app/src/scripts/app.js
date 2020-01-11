@@ -29,7 +29,7 @@ $(document).ready(function() {
                 response.forEach(function (element) {
                     let placesToWriteData = element["dayOfWeek"] + element["timeRange"];
                     placesToWriteData = replaceAll(placesToWriteData, ':', '\\:');
-                    $('#'+placesToWriteData).html(element['courseCode'] + '<br>' + '(' + element["roomNumber"] + ')' + ' - ' + element["teacher"]);
+                    $('#'+placesToWriteData).append(element['courseCode'] + '<br>' + '(' + element["roomNumber"] + ')' + ' - ' + element["teacher"] + '<br>');
                 });
                 $('#semesterName').text('Class Schedule : ' + response[0]["status"]["nameOfFilesUploaded"]);
                 $('#modal1').modal('open');

@@ -4,6 +4,7 @@
     <meta charset="utf-8"/> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
     <title>@ViewData["Title"] - Routine Explorer</title> 
     <link rel="icon" href="https://bitsofco.de/favicon.png" type="image/gif" sizes="16x16"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" >
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Product+Sans:400&amp;lang=en" rel="stylesheet"> 
@@ -21,20 +22,20 @@
 <header>
     <nav class="nav-extended nav-fixed white">
         <div class="nav-wrapper">
-            <a class="brand-logo grey-text text-darken-3" id="page-logo"> <i class="material-icons blue-text text-darken-1" id="page-logo-icon">brightness_7</i> &nbsp; RE </a>
+            <a class="brand-logo grey-text text-darken-3" id="page-logo" asp-action="Index" asp-controller="Home"> <i class="material-icons blue-text text-darken-1" id="page-logo-icon">brightness_7</i> &nbsp; RE </a>
             <a href="#" class="sidenav-trigger" data-target="mobile-nav">
                 <i class="material-icons grey-text text-darken-4">menu</i>
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
-                    <a class="grey-text text-darken-3" href="https://github.com/shunjid/routine-explorer"><i class="material-icons blue-text text-darken-3 left">code</i>GitHub</a>
+                    <a target="_blank" class="grey-text text-darken-3" href="https://github.com/shunjid/routine-explorer"><i class="fab fa-github grey-text text-darken-3 left"></i>GitHub</a>
                 </li>
             </ul>
         </div>
     </nav>
     <ul class="sidenav yellow-text text-darken-3" id="mobile-nav">
         <li>
-            <a target="_blank" class="title" href="https://github.com/shunjid/routine-explorer"> <i class="fab fa-github grey-text"></i> GitHub </a>
+            <a target="_blank" class="title" href="https://github.com/shunjid/routine-explorer"> <i class="fab fa-github grey-text text-darken-3"></i> GitHub </a>
         </li>
     </ul>
 </header>

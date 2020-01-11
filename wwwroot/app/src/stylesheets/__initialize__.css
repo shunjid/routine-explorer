@@ -194,5 +194,5 @@ img {
 
 .modal{
     width: 100%;
-    height: 200%;
+    min-height: 100%;
 }
