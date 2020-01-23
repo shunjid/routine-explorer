@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace routineexplorer.Migrations
 {
-    public partial class AuthMig : Migration
+    public partial class VacancyMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -238,6 +238,28 @@ namespace routineexplorer.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "VacantRooms",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RoomNumber = table.Column<string>(nullable: false),
+                    DayOfWeek = table.Column<string>(nullable: false),
+                    TimeRange = table.Column<string>(nullable: false),
+                    StatusId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VacantRooms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VacantRooms_RoutineFileUploaderStatus_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "RoutineFileUploaderStatus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -279,6 +301,11 @@ namespace routineexplorer.Migrations
                 name: "IX_Routine_StatusId",
                 table: "Routine",
                 column: "StatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VacantRooms_StatusId",
+                table: "VacantRooms",
+                column: "StatusId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -309,6 +336,9 @@ namespace routineexplorer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Routine");
+
+            migrationBuilder.DropTable(
+                name: "VacantRooms");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -39,4 +39,9 @@
     <_ContentIncludedByDefault Remove="Views\RoutineFileUploaderStatuses\Index.cshtml" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Migrations" />
+  </ItemGroup>
+
 </Project>

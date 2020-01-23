@@ -10,6 +10,7 @@ namespace routine_explorer.Data
         
         public DbSet<Credential> Credentials { get; set; }
         public DbSet<Routine> Routine { get; set; }
+        public DbSet<VacantRoom> VacantRooms { get; set; }
         public DbSet<RoutineFileUploaderStatus> RoutineFileUploaderStatus { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
         public DbSet<Audit> Audit { get; set; }

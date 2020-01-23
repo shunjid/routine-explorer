@@ -342,6 +342,34 @@ namespace routineexplorer.Migrations
                     b.ToTable("RoutineFileUploaderStatus");
                 });
 
+            modelBuilder.Entity("routine_explorer.Models.VacantRoom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("DayOfWeek")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("RoomNumber")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TimeRange")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("VacantRooms");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -394,6 +422,15 @@ namespace routineexplorer.Migrations
                 });
 
             modelBuilder.Entity("routine_explorer.Models.Routine", b =>
+                {
+                    b.HasOne("routine_explorer.Models.RoutineFileUploaderStatus", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("routine_explorer.Models.VacantRoom", b =>
                 {
                     b.HasOne("routine_explorer.Models.RoutineFileUploaderStatus", "Status")
                         .WithMany()

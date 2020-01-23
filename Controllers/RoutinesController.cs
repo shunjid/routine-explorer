@@ -74,7 +74,7 @@ namespace routine_explorer.Controllers
             }
 
             var routine = new HashSet<Routine>();
-            var vacancy = new HashSet<Routine>();
+            var vacancy = new HashSet<VacantRoom>();
             try
             {
                 using (var memoryStream = new MemoryStream())
@@ -127,6 +127,13 @@ namespace routine_explorer.Controllers
                                         teacher = workSheet.Cells[y, z].Text;
                                         if (course.Replace(" ", String.Empty) == "")
                                         {
+                                            vacancy.Add(new VacantRoom
+                                            {
+                                                Status = routineFileUploaderStatus,
+                                                RoomNumber = room.Replace(" ", String.Empty),
+                                                TimeRange = GetTimeStamp(timesOfADay, z),
+                                                DayOfWeek = daysOfWeek[x],
+                                            });
                                         }
                                         else
                                         {
@@ -173,7 +180,7 @@ namespace routine_explorer.Controllers
                     TimeStamp = DateTime.Now,
                     ToastStyle = "red lighten-1 rounded"
                 })
-                : Json(routine);
+                : Json(vacancy);
             /*new PostLog
             {
                 Message = "😎 success",
