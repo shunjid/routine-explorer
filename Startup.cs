@@ -60,6 +60,14 @@ namespace routine_explorer
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            
+            app.UseEndpoints(routes =>
+            {
+                routes.MapControllerRoute(
+                    "api",
+                    "api/{controller}/{id?}");
+            });
+
         }
     }
 }

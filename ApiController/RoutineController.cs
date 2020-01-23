@@ -18,6 +18,11 @@ namespace routine_explorer.ApiController
         {
             _context = context;
         }
+
+        private static string SanitizeTeacherInitial(string initial)
+        {
+            return string.IsNullOrEmpty(initial) ? "INVALID" : initial.ToUpper().Replace(" ", string.Empty);
+        }
         
         private static string SanitizeCourseCodeInput(string courseCode)
         {
@@ -55,7 +60,7 @@ namespace routine_explorer.ApiController
             }
         }
 
-        [HttpPost("{GetRoutineByCourses}")]
+        [HttpPost("GetRoutineByCourses")]
         public async Task<JsonResult> GetRoutineByCourses([FromBody]Subjects subjects)
         {
             try
@@ -72,6 +77,28 @@ namespace routine_explorer.ApiController
                     .ToListAsync();
 
                 return Json(schedule);
+            }
+            catch (Exception e)
+            {
+                return Json(new ApiErrorModel
+                {
+                    ErrorMessage = e.Message,
+                    StackTrace = e.StackTrace,
+                    DateTime = DateTime.Now
+                });
+            }
+        }
+
+        [HttpPost("GetScheduleForTeacher")]
+        public async Task<JsonResult> GetScheduleForTeacher([FromBody]TeacherAPI teacher)
+        {
+            try
+            {
+                var scheduleForTeacher = await _context.Routine
+                                                    .Where(r => r.Status == teacher.Status)
+                                                    .Where(t => t.Teacher == SanitizeTeacherInitial(teacher.TeacherInitial))
+                                                    .ToListAsync();
+                return Json(scheduleForTeacher);
             }
             catch (Exception e)
             {
