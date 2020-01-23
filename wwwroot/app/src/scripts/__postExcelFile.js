@@ -4,6 +4,18 @@ $(function () {
         $('#customizedMessage').text('Hi, ' + toTitleCase(response));
         toast('😎 Welcome back, ' + toTitleCase(response), "rounded blue darken-2");
     });
+
+    let auditData = {};
+    let request = $.getJSON('https://api.ipdata.co/?api-key=test', function (responseData, status) {
+        auditData = {
+            areaAccessed: "Admin Panel",
+            actionDateTime: new Date().getDate(),
+            userIP: responseData["ip"],
+            userLocation: " latitude : " + responseData["latitude"] + " longitude : " + responseData["longitude"]
+        };
+    }).done(function () {
+        $.post('Audit', { audit: auditData }, function() { console.log("audited"); }, "json");
+    });
     
     $('#fileUploaderForm').submit(function(e){
         e.preventDefault();

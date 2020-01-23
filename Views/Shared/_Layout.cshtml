@@ -35,7 +35,9 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li>
-                        <a target="_blank" class="grey-text text-darken-3" asp-action="DismissCredential" asp-controller="Credential"><i class="fas fa-sign-out-alt deep-orange-text left"></i>LogOut</a>
+                        <a target="_blank" class="grey-text text-darken-3" asp-action="DismissCredential" asp-controller="Credential">
+                            <i class="fas fa-power-off blue-text text-darken-3 left"></i>LogOut
+                        </a>
                     </li>
                 }
             </ul>
@@ -48,7 +50,9 @@
         @if (SignInManager.IsSignedIn(User))
         {
             <li>
-                <a target="_blank" class="grey-text text-darken-3" asp-action="DismissCredential" asp-controller="Credential"><i class="fas fa-sign-out-alt deep-orange-text left"></i>LogOut</a>
+                <a target="_blank" class="grey-text text-darken-3" asp-action="DismissCredential" asp-controller="Credential">
+                    <i class="fas fa-power-off blue-text text-darken-3 left"></i>LogOut
+                </a>
             </li>
         }
     </ul>

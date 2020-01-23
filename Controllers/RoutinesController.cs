@@ -28,6 +28,16 @@ namespace routine_explorer.Controllers
         }
         
         private Task<IdentityUser> GetCurrentUserAsync() => _authToken.GetUserAsync(HttpContext.User);
+
+        [HttpPost]
+        public async Task<JsonResult> Audit(Audit audit)
+        {
+            audit.UserLocation = "Accessed by the user id : " + _getCurrentlyLoggedInUser() +
+                                 " from " + audit.UserLocation;
+            _context.Add(audit);
+            await _context.SaveChangesAsync();
+            return Json("Saved");
+        }
         
         public async Task<JsonResult> GetUserName()
         {
