@@ -1,11 +1,41 @@
 @model routine_explorer.Models.Routine
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Upload Routine";
 }
-<h4>Upload Routine File</h4><div class="row"> <div class="col-md-12"> <fieldset style="margin-top: 15px"> <form method="post" asp-action="FileUpload" asp-controller="Routines" enctype="multipart/form-data"> <div class="file-field input-field"> <div class="btn blue darken-3"> <span>File</span> <input type="file" name="file" onchange="ValidateSingleInput(this)"/> </div><div class="file-path-wrapper"> <input class="file-path validate" type="text"> </div></div><p class="center-align"> <input class="btn btn-small pink darken-3" type="submit" value="Upload"/> </p></form> </fieldset> </div></div><div></div>
+
+<div class="container">
+    <div class="col s12 m7">
+        <h5>Upload the .xlsx file of SWE Routine</h5>
+        <div class="card horizontal">
+            <div class="card-image">
+                <img src="~/images/upload.svg" alt="upload svg">
+            </div>
+            <div class="card-stacked">
+                <form id="fileUploaderForm">
+                    <div class="row">
+                        <div class="file-field input-field col s12 l6">
+                            <div class="btn blue darken-3">
+                                <span>File</span> 
+                                <input type="file" id="file" name="file" onchange="ValidateSingleInput(this)"/>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <input class="btn btn-small pink darken-3" type="submit" value="Upload"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    await Html.RenderPartialAsync("_ValidateFileExtension");
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        await Html.RenderPartialAsync("_ValidateFileExtension");
     }
 }

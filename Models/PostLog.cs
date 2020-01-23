@@ -11,5 +11,7 @@ namespace routine_explorer.Models
         
         [DataType(DataType.DateTime)]
         public DateTime TimeStamp { get; set; }
+
+        public string ToastStyle { get; set; }
     }
 }
