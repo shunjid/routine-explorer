@@ -4,8 +4,11 @@ namespace routine_explorer.ApiController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CoursesController : ControllerBase
+    public class DocsController : Controller
     {
-        
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }
