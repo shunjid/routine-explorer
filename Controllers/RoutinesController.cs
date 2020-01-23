@@ -26,6 +26,14 @@ namespace routine_explorer.Controllers
         {
             return _authToken.GetUserId(HttpContext.User);
         }
+        
+        private Task<IdentityUser> GetCurrentUserAsync() => _authToken.GetUserAsync(HttpContext.User);
+        
+        public async Task<JsonResult> GetUserName()
+        {
+            var user = await GetCurrentUserAsync();
+            return Json(user.UserName);
+        }
 
         // GET: Routines/Create
         public IActionResult Create()

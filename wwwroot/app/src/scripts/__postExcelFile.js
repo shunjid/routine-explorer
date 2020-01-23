@@ -1,4 +1,10 @@
 $(function () {
+    $.get('GetUserName', function () {
+    }).done(function (response) {
+        $('#customizedMessage').text('Hi, ' + toTitleCase(response));
+        toast('😎 Welcome back, ' + toTitleCase(response), "rounded blue darken-2");
+    });
+    
     $('#fileUploaderForm').submit(function(e){
         e.preventDefault();
         if ($('#file').val() === '') {
@@ -39,4 +45,13 @@ function toast(data, style) {
         html : data,
         classes : style
     });
+}
+
+function toTitleCase(str) {
+    return str.replace(
+        /\w\S*/g,
+        function(txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        }
+    );
 }
