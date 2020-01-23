@@ -89,5 +89,11 @@ namespace routine_explorer.Controllers
                 });
             }
         }
+
+        public async Task<IActionResult> DismissCredential()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
