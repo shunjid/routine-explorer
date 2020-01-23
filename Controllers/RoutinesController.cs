@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using routine_explorer.Data;
@@ -14,19 +15,35 @@ namespace routine_explorer.Controllers
     public class RoutinesController : Controller
     {
         private readonly DatabaseContext _context;
-        public RoutinesController(DatabaseContext context)
+        private readonly UserManager<IdentityUser> _authToken;
+        public RoutinesController(DatabaseContext context, UserManager<IdentityUser> authToken)
         {
             _context = context;
+            _authToken = authToken;
+        }
+        
+        private string _getCurrentlyLoggedInUser()
+        {
+            return _authToken.GetUserId(HttpContext.User);
         }
 
         // GET: Routines/Create
         public IActionResult Create()
         {
+            if (_getCurrentlyLoggedInUser() == null)
+            {
+                return RedirectToAction("SetAuthorizationCookieImpersistent", "Credential");
+            }
             return View();
         }
         
         public async Task<IActionResult> FileUpload(IFormFile file)
         {
+            if (_getCurrentlyLoggedInUser() == null)
+            {
+                return RedirectToAction("SetAuthorizationCookieImpersistent", "Credential");
+            }
+            
             var routine = new HashSet<Routine>();
             if (file == null || file.Length == 0 || !file.FileName.EndsWith("xlsx") || file.Length > 35000)
             {

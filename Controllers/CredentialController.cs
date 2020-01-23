@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -43,6 +44,38 @@ namespace routine_explorer.Controllers
                 {
                     Message = "Credential verified",
                     HasError = false,
+                    TimeStamp = DateTime.Now
+                });
+            }
+            catch (Exception e)
+            {
+                return Json(new PostLog
+                {
+                    Message = e.Message,
+                    HasError = true,
+                    TimeStamp = DateTime.Now
+                });
+            }
+        }
+
+        public IActionResult SetAuthorizationCookieImpersistent()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public async Task<JsonResult> SetAuthorizationCookieImpersistent(CookieSetter cookieSetter)
+        {
+            if(!ModelState.IsValid)
+                return Json(ModelState.Values.SelectMany(v => v.Errors));
+
+            try
+            {
+                await _signInManager.PasswordSignInAsync(new MailAddress(cookieSetter.CredentialEmail).User, cookieSetter.CredentialKey, false, false);
+                return Json(new PostLog
+                {
+                    Message = "Authorized successfully",
+                    HasError = true,
                     TimeStamp = DateTime.Now
                 });
             }
