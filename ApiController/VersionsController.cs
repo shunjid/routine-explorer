@@ -38,7 +38,7 @@ namespace routine_explorer.ApiController
             }
         }
         
-        [HttpGet("{GetLatestVersion}")]
+        [HttpGet("GetLatestVersion")]
         public async Task<JsonResult> GetLatestVersion()
         {
             try
