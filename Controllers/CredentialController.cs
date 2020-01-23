@@ -75,7 +75,7 @@ namespace routine_explorer.Controllers
                 return Json(new PostLog
                 {
                     Message = "Authorized successfully",
-                    HasError = true,
+                    HasError = false,
                     TimeStamp = DateTime.Now
                 });
             }

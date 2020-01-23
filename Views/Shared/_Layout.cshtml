@@ -45,6 +45,12 @@
         <li>
             <a target="_blank" class="title" href="https://github.com/shunjid/routine-explorer"> <i class="fab fa-github grey-text text-darken-3"></i> GitHub </a>
         </li>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <li>
+                <a target="_blank" class="grey-text text-darken-3" asp-action="DismissCredential" asp-controller="Credential"><i class="fas fa-sign-out-alt deep-orange-text left"></i>LogOut</a>
+            </li>
+        }
     </ul>
 </header>
 <div id="load" class="progress light-blue lighten-4">
