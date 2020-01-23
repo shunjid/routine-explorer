@@ -127,13 +127,16 @@ namespace routine_explorer.Controllers
                                         teacher = workSheet.Cells[y, z].Text;
                                         if (course.Replace(" ", String.Empty) == "")
                                         {
-                                            vacancy.Add(new VacantRoom
+                                            if (!string.IsNullOrEmpty(room))
                                             {
-                                                Status = routineFileUploaderStatus,
-                                                RoomNumber = room.Replace(" ", String.Empty),
-                                                TimeRange = GetTimeStamp(timesOfADay, z),
-                                                DayOfWeek = daysOfWeek[x],
-                                            });
+                                                vacancy.Add(new VacantRoom
+                                                {
+                                                    Status = routineFileUploaderStatus,
+                                                    RoomNumber = room.Replace(" ", string.Empty),
+                                                    TimeRange = GetTimeStamp(timesOfADay, z),
+                                                    DayOfWeek = daysOfWeek[x],
+                                                });
+                                            }
                                         }
                                         else
                                         {

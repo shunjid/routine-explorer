@@ -20,10 +20,10 @@ $(function () {
             },
             success: function (response) {
                 toast(response["message"], response["toastStyle"]);
-                $(".progress").hide();
             },
             error: function () {
                 toast("Something went wrong", "rounded red darken-1");
+                $('#fileUploaderForm')[0].reset();
                 $(".progress").hide();
             },
             complete: function () {
