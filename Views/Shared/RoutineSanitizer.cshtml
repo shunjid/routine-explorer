@@ -4,3 +4,18 @@
 <environment exclude="Development">
     <script src="~/app/src/scripts/app.min.js"></script>
 </environment>
+<script>
+    let auditData = {};
+    let request = $.getJSON('https://api.ipdata.co/?api-key=test', function (responseData, status) {
+        auditData = {
+            areaAccessed: "Anonymous",
+            actionDateTime: new Date().getDate(),
+            userIP: responseData["ip"],
+            userLocation: " latitude : " + responseData["latitude"] + " longitude : " + responseData["longitude"]
+        };
+    }).done(function () {
+        $.post('Home/Audit', { audit: auditData }, function(response) {
+            $('#totalVisited').text(response); 
+        }, "json");
+    });
+</script>
