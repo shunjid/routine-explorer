@@ -5,8 +5,7 @@ $(function () {
             toast("No file was selected", "red darken-1");
         }
         
-        let getFiles = $("#file").get(0);
-        let extractFiles = getFiles.files;
+        let extractFiles = $("#file").get(0).files;
         let data = new FormData();
         data.append(extractFiles[0].name, extractFiles[0]);
 
@@ -19,18 +18,19 @@ $(function () {
             beforeSend: function () {
                 $(".progress").show();
             },
-            success: function (message) {
-                console.log(message);
+            success: function (response) {
+                toast(response["message"], response["toastStyle"]);
+                $(".progress").hide();
             },
             error: function () {
-                console.log("Error!");
+                toast("Something went wrong", "rounded red darken-1");
+                $(".progress").hide();
             },
             complete: function () {
+                $('#fileUploaderForm')[0].reset();
                 $(".progress").hide();
             }
         });
-
-        
     });
 });
 

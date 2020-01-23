@@ -154,12 +154,25 @@ namespace routine_explorer.Controllers
                     }
                 }
 
-                /*foreach (var item in routine)
+                foreach (var item in routine)
                 {
                     _context.Add(item);
                 }
 
-                await _context.SaveChangesAsync();*/
+                foreach (var item in vacancy)
+                {
+                    _context.Add(item);
+                }
+
+                _context.Add(new Audit
+                {
+                    AreaAccessed = "PostExcelFile",
+                    UserLocation = "A file was added by " + _getCurrentlyLoggedInUser() + " from anonymous Location",
+                    UserIP = "Anonymous",
+                    ActionDateTime = DateTime.Now
+                });
+
+                await _context.SaveChangesAsync();
             }
             catch (Exception e)
             {
@@ -180,14 +193,13 @@ namespace routine_explorer.Controllers
                     TimeStamp = DateTime.Now,
                     ToastStyle = "red lighten-1 rounded"
                 })
-                : Json(vacancy);
-            /*new PostLog
-            {
-                Message = "😎 success",
-                HasError = false,
-                TimeStamp = DateTime.Now,
-                ToastStyle = "green lighten-1 rounded"
-            }*/
+                : Json(new PostLog
+                {
+                    Message = "😎 success",
+                    HasError = false,
+                    TimeStamp = DateTime.Now,
+                    ToastStyle = "green lighten-1 rounded"
+                });
         }
 
         private static string GetTimeStamp(IReadOnlyList<string> arr, int cellValue)
