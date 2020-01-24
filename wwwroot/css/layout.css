@@ -1,0 +1,49 @@
+.base-dark {
+    background-color: #202124;
+    color: white;
+}
+
+.blueish-dark {
+    background-color: #1D1E21;
+    color: white;
+}
+
+.base-dark-32{
+    background-color: #292929;
+    color: white;
+}
+
+/* label focus color */
+.input-field input:focus + label {
+    color: #1976d2 !important;
+}
+
+::placeholder {
+    color: #757575;
+}
+
+.input-field [type=text] {
+    color: white;
+}
+
+.input-field [type=password] {
+    color: white;
+}
+
+/* label underline focus color */
+.row .input-field input:focus {
+    border-bottom: 1px solid #1976d2 !important;
+    box-shadow: 0 1px 0 0 #1976d2 !important
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.btn {
+    border-radius: 16px;
+}
+
+.modal {
+    background-color: #1D1E21;
+}

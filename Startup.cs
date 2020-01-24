@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using routine_explorer.Data;
+using routine_explorer.Models;
 
 namespace routine_explorer
 {
@@ -27,6 +29,8 @@ namespace routine_explorer
 
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("ApplicationDbContextConnection")));
+            
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DatabaseContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +52,7 @@ namespace routine_explorer
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
@@ -55,6 +60,14 @@ namespace routine_explorer
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            
+            app.UseEndpoints(routes =>
+            {
+                routes.MapControllerRoute(
+                    "api",
+                    "api/{controller}/{id?}");
+            });
+
         }
     }
 }

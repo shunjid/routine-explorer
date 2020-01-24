@@ -1,0 +1,159 @@
+/*
+http://localhost:5000/api/routine
+body: 
+{
+    "id": 1,
+    "nameOfFilesUploaded": "Spring 2020 Version-2",
+    "statusOfPublish": true,
+    "timeOfUpload": "2020-01-23T23:27:22.8211125"
+}
+response:
+[
+    {
+        "id": 1,
+        "roomNumber": "601AB",
+        "courseCode": "CS312A",
+        "teacher": "MAR",
+        "dayOfWeek": "Saturday",
+        "timeRange": "02:30-04:00",
+        "status": null
+    },
+    {
+        "id": 2,
+        "roomNumber": "305AB",
+        "courseCode": "ENG101A",
+        "teacher": "SM",
+        "dayOfWeek": "Tuesday",
+        "timeRange": "10:00-11:30",
+        "status": null
+}]
+*/
+
+/*
+http://localhost:5000/api/routine/GetRoutineByCourses
+body:
+{
+	"subject01": "SWE422A",
+	"subject02": null,
+	"subject03": "SWE425A",
+	"subject04": null,
+	"subject05": null,
+	"status" : {
+			     "id": 1,
+			     "nameOfFilesUploaded": "Spring 2020 Version-2",
+			     "statusOfPublish": true,
+			     "timeOfUpload": "2020-01-23T23:27:22.8211125"
+			   }
+}
+response
+[
+{
+        "id": 333,
+        "roomNumber": "405AB",
+        "courseCode": "SWE422A_LAB",
+        "teacher": "LR",
+        "dayOfWeek": "Sunday",
+        "timeRange": "10:00-11:30",
+        "status": null
+    },
+    {
+        "id": 358,
+        "roomNumber": "507MB",
+        "courseCode": "SWE425A_LAB",
+        "teacher": "ZI",
+        "dayOfWeek": "Sunday",
+        "timeRange": "04:00-05:30",
+        "status": null
+}]
+*/
+
+/*
+http://localhost:5000/api/routine/GetScheduleForTeacher
+body:
+{
+	"TeacherInitial": "MAH",
+	"status" : {
+			     "id": 1,
+			     "nameOfFilesUploaded": "Spring 2020 Version-2",
+			     "statusOfPublish": true,
+			     "timeOfUpload": "2020-01-23T23:27:22.8211125"
+			   }
+}
+response:
+[
+    {
+        "id": 15,
+        "roomNumber": "405AB",
+        "courseCode": "SWE331C",
+        "teacher": "MAH",
+        "dayOfWeek": "Tuesday",
+        "timeRange": "04:00-05:30",
+        "status": null
+    },
+    {
+        "id": 28,
+        "roomNumber": "501AB",
+        "courseCode": "SE211A",
+        "teacher": "MAH",
+        "dayOfWeek": "Wednesday",
+        "timeRange": "01:00-02:30",
+        "status": null
+}]
+*/
+
+
+
+
+________________________________________________
+
+
+/*
+http://localhost:5000/api/vacant
+body:
+{
+    "id": 1,
+    "nameOfFilesUploaded": "Spring 2020 Version-2",
+    "statusOfPublish": true,
+    "timeOfUpload": "2020-01-23T23:27:22.8211125"
+}
+response:
+[
+    {
+        "id": 1,
+        "roomNumber": "505AB",
+        "dayOfWeek": "Wednesday",
+        "timeRange": "10:00-11:30",
+        "status": null
+    },
+    {
+        "id": 2,
+        "roomNumber": "505AB",
+        "dayOfWeek": "Wednesday",
+        "timeRange": "08:30-10:00",
+        "status": null
+}]
+*/
+
+
+_________________________________________________
+
+/*
+ * http://localhost:5000/api/versions
+ [
+    {
+        "id": 1,
+        "nameOfFilesUploaded": "Spring 2020 Version-2",
+        "statusOfPublish": true,
+        "timeOfUpload": "2020-01-23T23:27:22.8211125"
+    }
+] 
+ 
+ 
+ * http://localhost:5000/api/versions/GetLatestVersion
+ {
+    "id": 1,
+    "nameOfFilesUploaded": "Spring 2020 Version-2",
+    "statusOfPublish": true,
+    "timeOfUpload": "2020-01-23T23:27:22.8211125"
+  }
+ */

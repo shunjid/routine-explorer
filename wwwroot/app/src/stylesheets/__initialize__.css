@@ -70,7 +70,7 @@ table, th, td {
 }
 
 #load{
-    margin-top: 64px;
+    margin-top: 66px;
 }
 
 h2 {
@@ -193,6 +193,5 @@ img {
 }
 
 .modal{
-    width: 100%;
-    min-height: 100%;
+    width: 85%;
 }

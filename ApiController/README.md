@@ -1,21 +1,9 @@
-# Routine Explorer, v3.0
+# API : Routine Explorer
 
-![Docker Build](https://img.shields.io/docker/cloud/build/shunjid/routine-explorer)  ![action badge](https://action-badges.now.sh/shunjid/routine-explorer)   ![dotnet](https://img.shields.io/badge/built%20with-.net%20core%203.1-blueviolet)
-
-In every semester, Department of Software Engineering of the [Daffodil International University](https://diu.edu.bd) provides class schedule in **.xlsx** file format. 
-
-Mobile             |  Desktop
-:-------------------------:|:-------------------------:
-![Mobile View](https://media.giphy.com/media/ZBytgye9cARGijyWhH/giphy.gif)  |  ![Desktop View](https://media.giphy.com/media/gfrmGrqkdk7PgFJiVE/giphy.gif)
-
-It's not an easy task for a student to find class schedule of 6 working days from a lot of data. To solve this problem, routine-explorer comes with the idea to help students finding their class schedule in a **6 x 6 GRID** where :
-
-- Student's can select the latest routine version provided by the department
-- Search for classes of 5 (max) courses through the keyword pattern 'Course Name' + 'Section'.
-
-## API Usage
-
-In it's v3.0 it has arrive with API so that some other applications like:
+Routine explorer is a free and open source application that helps finding
+class schedule of the Department of Software Engineering of Daffodil International
+University in a **6 x 6 Grid**.  In it's v3.0 it has arrive with API so that some other
+applications like:
 
 -   Room booking (By using the data of unused rooms)
 -   Weekly class tracking of each room

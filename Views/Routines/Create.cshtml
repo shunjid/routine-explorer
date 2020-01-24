@@ -1,11 +1,59 @@
 @model routine_explorer.Models.Routine
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Upload Routine";
 }
-<h4>Upload Routine File</h4><div class="row"> <div class="col-md-12"> <fieldset style="margin-top: 15px"> <form method="post" asp-action="FileUpload" asp-controller="Routines" enctype="multipart/form-data"> <div class="file-field input-field"> <div class="btn blue darken-3"> <span>File</span> <input type="file" name="file" onchange="ValidateSingleInput(this)"/> </div><div class="file-path-wrapper"> <input class="file-path validate" type="text"> </div></div><p class="center-align"> <input class="btn btn-small pink darken-3" type="submit" value="Upload"/> </p></form> </fieldset> </div></div><div></div>
+
+<div class="container">
+    <div class="col s12 m7">
+        <h5>Upload the .xlsx file of SWE Routine</h5>
+        <div class="card blueish-dark horizontal">
+            <div class="card-image">
+                <img src="~/images/upload.svg" alt="upload svg">
+            </div>
+            <div class="card-stacked">
+                <form id="fileUploaderForm" style="padding-left: 20px;">
+                    <div class="row">
+                        <div class="file-field input-field col s12 l8">
+                            <div class="btn grey darken-3">
+                                <span>File</span> 
+                                <input type="file" id="file" name="file" onchange="ValidateSingleInput(this)"/>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 l6">
+                            <input class="btn btn-small blue darken-2" type="submit" value="Upload"/>
+                        </div>
+                    </div>
+                </form>
+                <div class="card-action">
+                    <p id="customizedMessage"></p>
+                    <p>
+                        In the form above, you have to upload the class schedule file <b>(.xlsx)</b> provided by the
+                        Department of Software Engineering. If you face any problem regarding upload, please mail me at
+                        <b>shunjid.se@gmail.com</b>.
+                    </p>
+                    <p class="justifyText">
+                        <b class="red-text">ATTENTION : </b> This is a non-profit and free educational purpose software. 
+                        Whatever you do here (every user action), are being <b>tracked</b> by this application.
+                        By verifying yourself in this area, you agree that in some special cases your 
+                        <b class="blue-text text-darken-3">LOCATION</b> (longitude & latitude) and your current 
+                        <b class="blue-text text-darken-3">IP ADDRESS</b> might be tracked.
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    await Html.RenderPartialAsync("_ValidateFileExtension");
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        await Html.RenderPartialAsync("_ValidateFileExtension");
     }
 }

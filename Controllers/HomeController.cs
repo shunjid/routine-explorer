@@ -16,6 +16,19 @@ namespace routine_explorer.Controllers
         {
             _context = context;
         }
+        
+        [HttpPost]
+        public async Task<JsonResult> Audit(Audit audit)
+        {
+            audit.UserLocation = "Accessed by anonymous user " +
+                                 " from " + audit.UserLocation;
+            _context.Add(audit);
+            await _context.SaveChangesAsync();
+
+            var allAudit = await _context.Audit.Where(x => x.AreaAccessed == "Anonymous").ToListAsync();
+            return Json(allAudit.Count);
+        }
+        
         public async Task<IActionResult> Index()
         {
             try
