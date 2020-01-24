@@ -136,7 +136,7 @@ request.AddHeader("Accept", "*/*");
 IRestResponse response = client.Execute(request);
 ```
 
-## GET the unused rooms (Routine Version Wise)
+## Find the unused rooms (Routine Version Wise)
 
 In this context, you ```POST```  to the ```api/vacant```
 and include a Routine-Version object to the body from the previous context.
@@ -251,7 +251,7 @@ IRestResponse response = client.Execute(request);
 In this context, you hit ```GET```  to the ```api/routine```
 and include a Routine-Version object.
 
-For example, if you hit a ```POST``` request:
+For example, if you hit a ```GET``` request:
 - at localhost - ```http://localhost:5000/api/routine```
 - at heroku - ```http://routine-explorer.herokuapp.com/api/routine```
 and include a Routine-Version object to the body like:
@@ -263,7 +263,7 @@ and include a Routine-Version object to the body like:
     "timeOfUpload": "2020-01-23T23:27:22.8211125"
 }
 ```
-Then you will get a response which is an array of object returning the unused rooms in that routine version you requested from the body like:
+Then you will get a response which is an array of object returning the class schedules in that routine version you requested from the body like:
 ```json
 [
     {
@@ -361,3 +361,73 @@ request.AddHeader("Content-Type", "application/json");
 request.AddParameter("status", "{\n    \"id\": 1,\n    \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n    \"statusOfPublish\": true,\n    \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n}", ParameterType.RequestBody);
 IRestResponse response = client.Execute(request);
 ```
+
+## Find class schedule by courses (Routine Version Wise)
+
+In this context, you ```POST```  to the ```api/routine/GetRoutineByCourses```
+and include a **subjects** object to the body.
+
+For example, if you hit a ```POST``` request:
+- at localhost - ```http://localhost:5000/api/routine/GetRoutineByCourses```
+- at heroku - ```http://routine-explorer.herokuapp.com/api/routine/GetRoutineByCourses```
+and include a **subjects** object to the body like:
+```json
+{
+	"subject01": "SWE422A",
+	"subject02": null,
+	"subject03": "SWE425A",
+	"subject04": null,
+	"subject05": null,
+	"status" : {
+			     "id": 1,
+			     "nameOfFilesUploaded": "Spring 2020 Version-2",
+			     "statusOfPublish": true,
+			     "timeOfUpload": "2020-01-23T23:27:22.8211125"
+			   }
+}
+```
+Then you will get a response which is an array of object returning the class schedules in that routine version for the subjects you requested from the body like:
+```json
+[
+{
+        "id": 333,
+        "roomNumber": "405AB",
+        "courseCode": "SWE422A_LAB",
+        "teacher": "LR",
+        "dayOfWeek": "Sunday",
+        "timeRange": "10:00-11:30",
+        "status": null
+    },
+    {
+        "id": 358,
+        "roomNumber": "507MB",
+        "courseCode": "SWE425A_LAB",
+        "teacher": "ZI",
+        "dayOfWeek": "Sunday",
+        "timeRange": "04:00-05:30",
+        "status": null
+}]
+```
+#### Code Snippets : /api/routine/GetRoutineByCourses
+- **Flutter: ([HTTP](https://pub.dev/packages/http))**
+```dart
+import 'package:http/http.dart' as http;
+
+var url = 'http://routine-explorer.herokuapp.com/api/routine/GetRoutineByCourses';
+var response = await http.get(url, body: {
+                                         	'subject01': 'SWE422A',
+                                         	'subject02': null,
+                                         	'subject03': 'SWE425A',
+                                         	'subject04': null,
+                                         	'subject05': null,
+                                         	'status' : {
+                                         			     'id': 1,
+                                         			     'nameOfFilesUploaded': 'Spring 2020 Version-2',
+                                         			     'statusOfPublish': true,
+                                         			     'timeOfUpload': '2020-01-23T23:27:22.8211125'
+                                         			   }
+                                         });
+print('Response body: ${response.body}');
+```
+
+
