@@ -291,7 +291,7 @@ Then you will get a response which is an array of object returning the unused ro
 
 - **HTTP Request Snippet Example**
 ```http request
-POST /api/routine HTTP/1.1
+GET /api/routine HTTP/1.1
 Host: http://routine-explorer.herokuapp.com
 Content-Type: application/json
 Accept: */*
@@ -319,7 +319,7 @@ fun main(args: Array<String>) {
     var body = RequestBody.create(mediaType, "{\n \"id\": 1,\n \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n \"statusOfPublish\": true,\n \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n}")
     var request = Request.Builder()
     .url("http://routine-explorer.herokuapp.com/api/routine")
-    .post(body)
+    .get(body)
     .addHeader("Content-Type", "application/json")
     .addHeader("Accept", "*/*")
     .addHeader("Cache-Control", "no-cache")
@@ -338,7 +338,7 @@ fun main(args: Array<String>) {
 import 'package:http/http.dart' as http;
 
 var url = 'http://routine-explorer.herokuapp.com/api/routine';
-var response = await http.post(url, body: {
+var response = await http.get(url, body: {
                                       'id': 1,
                                       'nameOfFilesUploaded': 'Spring 2020 Version-2',
                                       'statusOfPublish': true,
@@ -349,7 +349,7 @@ print('Response body: ${response.body}');
 - **Xamarin ([RestSharp](https://www.nuget.org/packages/RestSharp))**
 ```c#
 var client = new RestClient("http://routine-explorer.herokuapp.com/api/routine");
-var request = new RestRequest(Method.POST);
+var request = new RestRequest(Method.GET);
 request.AddHeader("cache-control", "no-cache");
 request.AddHeader("Connection", "keep-alive");
 request.AddHeader("Content-Length", "147");
