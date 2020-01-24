@@ -19,52 +19,53 @@
         <link rel="stylesheet" href="~/app/lib/stylesheets/materialize.min.css"> 
         <link rel="stylesheet" href="~/app/src/stylesheets/__initialize__.min.css">
     </environment>
+    <link rel="stylesheet" href="~/css/layout.css"/>
 </head>
-<body class="grey lighten-4">
+<body class="base-dark-32">
 <header>
-    <nav class="nav-extended nav-fixed white">
+    <nav class="nav-extended nav-fixed blueish-dark white-text">
         <div class="nav-wrapper">
-            <a class="brand-logo grey-text text-darken-3" id="page-logo" asp-action="Index" asp-controller="Home"> <i class="material-icons blue-text text-darken-1" id="page-logo-icon">brightness_7</i> &nbsp; RE </a>
+            <a class="brand-logo white-text" id="page-logo" asp-action="Index" asp-controller="Home"> <i class="material-icons blue-text text-darken-1" id="page-logo-icon">brightness_7</i> &nbsp; RE </a>
             <a href="#" class="sidenav-trigger" data-target="mobile-nav">
-                <i class="material-icons grey-text text-darken-4">menu</i>
+                <i class="material-icons white-text">menu</i> 
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li>
-                    <a target="_blank" class="grey-text text-darken-3" href="/api/docs"> <i class="material-icons left green-text text-darken-1">code</i> API </a>
+                    <a target="_blank" class="white-text" href="/api/docs"> <i class="fas fa-code-branch left yellow-text text-darken-2"></i> API </a>
                 </li>
                 <li>
-                    <a target="_blank" class="grey-text text-darken-3" href="https://github.com/shunjid/routine-explorer"><i class="fab fa-github grey-text text-darken-3 left"></i>GitHub</a>
+                    <a target="_blank" class="white-text" href="https://github.com/shunjid/routine-explorer"><i class="fab fa-github"></i> GitHub</a>
                 </li>
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <li>
-                        <a target="_blank" class="grey-text text-darken-3" asp-action="DismissCredential" asp-controller="Credential">
-                            <i class="fas fa-power-off blue-text text-darken-3 left"></i>LogOut
+                        <a target="_blank" class="white-text" asp-action="DismissCredential" asp-controller="Credential">
+                            <i class="fas fa-power-off blue-text text-darken-1 left"></i>LogOut
                         </a>
                     </li>
                 }
             </ul>
         </div>
     </nav>
-    <ul class="sidenav yellow-text text-darken-3" id="mobile-nav">
+    <ul class="sidenav blue-grey darken-3 yellow-text text-darken-3" id="mobile-nav">
         <li>
-            <a target="_blank" class="title" href="/api/docs"> <i class="material-icons green-text text-darken-1">code</i> API </a>
+            <a target="_blank" class="title white-text" href="/api/docs"> <i class="material-icons green-text text-darken-1">code</i> API </a>
         </li>
         <li>
-            <a target="_blank" class="title" href="https://github.com/shunjid/routine-explorer"> <i class="fab fa-github grey-text text-darken-3"></i> GitHub </a>
+            <a target="_blank" class="title white-text" href="https://github.com/shunjid/routine-explorer"> <i class="fab fa-github white-text"></i> GitHub </a>
         </li>
         @if (SignInManager.IsSignedIn(User))
         {
             <li>
-                <a target="_blank" class="grey-text text-darken-3" asp-action="DismissCredential" asp-controller="Credential">
-                    <i class="fas fa-power-off blue-text text-darken-3 left"></i>LogOut
+                <a target="_blank" class="white-text" asp-action="DismissCredential" asp-controller="Credential">
+                    <i class="fas fa-power-off blue-text text-darken-1 left"></i>LogOut
                 </a>
             </li>
         }
     </ul>
 </header>
 <div id="load" class="progress light-blue lighten-4">
-    <div class="indeterminate blue darken-2"></div>
+    <div class="indeterminate blue darken-1"></div>
 </div>
 <div id="contents"> @RenderBody() </div>
 <environment include="Development">
