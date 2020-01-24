@@ -472,3 +472,71 @@ var response = await http.get(url, body: {
                                          });
 print('Response body: ${response.body}');
 ```
+
+
+## Find class schedule of teacher by initial (Routine Version Wise)
+
+In this context, you `POST`  to the `api/routine/GetScheduleForTeacher`
+and include a **teacher** object to the body.
+
+For example, if you hit a `POST` request:
+
+-   at localhost - `http://localhost:5000/api/routine/GetScheduleForTeacher`
+-   at heroku - `http://routine-explorer.herokuapp.com/api/routine/GetScheduleForTeacher`
+    and include a **subjects** object to the body like:
+
+```json
+{
+	"teacherInitial": "MAH",
+	"status" : {
+			     "id": 1,
+			     "nameOfFilesUploaded": "Spring 2020 Version-2",
+			     "statusOfPublish": true,
+			     "timeOfUpload": "2020-01-23T23:27:22.8211125"
+			   }
+}
+```
+
+Then you will get a response which is an array of object returning the class schedules in that routine version for the **teacher** you requested from the body like:
+
+```json
+[
+{
+        "id": 333,
+        "roomNumber": "405AB",
+        "courseCode": "SWE422A_LAB",
+        "teacher": "MAH",
+        "dayOfWeek": "Sunday",
+        "timeRange": "10:00-11:30",
+        "status": null
+    },
+    {
+        "id": 358,
+        "roomNumber": "507MB",
+        "courseCode": "SWE425A_LAB",
+        "teacher": "MAH",
+        "dayOfWeek": "Sunday",
+        "timeRange": "04:00-05:30",
+        "status": null
+}]
+```
+
+#### Code Snippets : /api/routine/GetScheduleForTeacher
+
+-   **Flutter: ([HTTP](https://pub.dev/packages/http))**
+
+```dart
+import 'package:http/http.dart' as http;
+
+var url = 'http://routine-explorer.herokuapp.com/api/routine/GetScheduleForTeacher';
+var response = await http.get(url, body: {
+                                         	'teacherInitial': 'MAH',
+                                         	'status' : {
+                                         			'id': 1,
+                                         			'nameOfFilesUploaded': 'Spring 2020 Version-2',
+                                         			'statusOfPublish': true,
+                                         			'timeOfUpload': '2020-01-23T23:27:22.8211125'
+                                         		}
+                                         });
+print('Response body: ${response.body}');
+```
