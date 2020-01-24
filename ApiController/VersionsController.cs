@@ -58,24 +58,3 @@ namespace routine_explorer.ApiController
         }
     }
 }
-
-/*
- * http://localhost:5000/api/versions
- [
-    {
-        "id": 1,
-        "nameOfFilesUploaded": "Spring 2020 Version-2",
-        "statusOfPublish": true,
-        "timeOfUpload": "2020-01-23T23:27:22.8211125"
-    }
-] 
- 
- 
- * http://localhost:5000/api/versions/GetLatestVersion
- {
-    "id": 1,
-    "nameOfFilesUploaded": "Spring 2020 Version-2",
-    "statusOfPublish": true,
-    "timeOfUpload": "2020-01-23T23:27:22.8211125"
-  }
- */
