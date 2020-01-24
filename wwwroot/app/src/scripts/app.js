@@ -11,7 +11,6 @@ $(document).ready(function() {
 
     $('#closeBtn').click(function () {
         $('#modal1').modal('close');
-        exitFullScreen();
     });
     
     $('#btnStudentRoutine').click(function () {
@@ -37,8 +36,6 @@ $(document).ready(function() {
                 });
                 $('#semesterName').text('Class Schedule : ' + response[0]["status"]["nameOfFilesUploaded"]);
                 $('#modal1').modal('open');
-                
-                toggleFullScreen(document.body);
             }
         }).always(function() {
             $('.progress').hide();
