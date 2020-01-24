@@ -15,12 +15,12 @@ people willing to built applications for the Dept. of SWE, can gather some idea 
 
 ## GET all versions of routine
 
-To get the list of routine files you need to hit the api at ```api/versions```. For example, if you hit a 
+To get the **list** of routines of different versions, you need to hit the api at ```api/versions```. For example, if you hit a 
 ```GET``` request:
-- In localhost - ```http://localhost:5000/api/versions```
-- In heroku - ```http://routine-explorer.herokuapp.com/api/versions```
+- at localhost - ```http://localhost:5000/api/versions```
+- at heroku - ```http://routine-explorer.herokuapp.com/api/versions```
 
-Then it will respond with an array of objects like below :
+After successful execution server will respond with an **Array of Objects** like below :
 ```json
 [
     {
@@ -31,49 +31,41 @@ Then it will respond with an array of objects like below :
     }
 ]
 ```
-##### Code Snippets : api/versions
-These are some code snippets that might help you dealing with the API at
-```api/versions``` :
-- **Python3 HTTP Client**
-```python
-import http.client
+#### Code Snippets : api/versions
+Here are some code snippets that might help you dealing with the API at
+```api/versions```:
 
-conn = http.client.HTTPConnection("http://routine-explorer.herokuapp.com")
+- **Kotlin: OkHTTP3**
+```kotlin
+import okhttp3.RequestBody.Companion.toRequestBody
 
-headers = {
-    'Accept': "*/*",
-    'Cache-Control': "no-cache",
-    'Host': "http://routine-explorer.herokuapp.com",
-    'Accept-Encoding': "gzip, deflate",
-    'Connection': "keep-alive",
-    'cache-control': "no-cache"
-    }
-
-conn.request("GET", "api,versions", headers=headers)
-
-res = conn.getresponse()
-data = res.read()
-
-print(data.decode("utf-8"))
+fun main(args: Array<String>) {
+    var client = OkHttpClient()
+    
+    var request = Request.Builder()
+    .url("http://routine-explorer.herokuapp.com/api/versions")
+    .get()
+    .addHeader("Accept", "*/*")
+    .addHeader("Cache-Control", "no-cache")
+    .addHeader("Host", "http://routine-explorer.herokuapp.com")
+    .addHeader("Accept-Encoding", "gzip, deflate")
+    .addHeader("Connection", "keep-alive")
+    .addHeader("cache-control", "no-cache")
+    .build()
+    
+    var response = client.newCall(request).execute()   
+}
 ```
-- **Java OK HTTP**
-```java
-OkHttpClient client = new OkHttpClient();
+- **Flutter: ([HTTP](https://pub.dev/packages/http#-readme-tab-))**
+```dart
+import 'package:http/http.dart' as http;
 
-Request request = new Request.Builder()
-  .url("http://routine-explorer.herokuapp.com/api/versions")
-  .get()
-  .addHeader("Accept", "*/*")
-  .addHeader("Cache-Control", "no-cache")
-  .addHeader("Host", "http://routine-explorer.herokuapp.com")
-  .addHeader("Accept-Encoding", "gzip, deflate")
-  .addHeader("Connection", "keep-alive")
-  .addHeader("cache-control", "no-cache")
-  .build();
-
-Response response = client.newCall(request).execute();
+var url = 'http://routine-explorer.herokuapp.com/api/versions';
+var response = await http.get(url);
+print('Response body: ${response.body}');
 ```
-- **C# RestSharp**
+
+- **Xamarin ([RestSharp](https://www.nuget.org/packages/RestSharp))**
 ```c#
 var client = new RestClient("http://routine-explorer.herokuapp.com/api/versions");
 var request = new RestRequest(Method.GET);
@@ -92,7 +84,7 @@ To get the latest version of routine object you need to hit the api at ```api/ve
 ```GET``` request:
 - at localhost - ```http://localhost:5000/api/versions/GetLatestVersion```
 - at heroku - ```http://routine-explorer.herokuapp.com/api/versions/GetLatestVersion```
-Then it will respond with a single object like below :
+Then a successful execution will respond with a single object like JSON snippet below :
 ```json
     {
         "id": 1,
@@ -101,49 +93,37 @@ Then it will respond with a single object like below :
         "timeOfUpload": "2020-01-23T23:27:22.8211125"
     }
 ```
-##### Code Snippets : api/versions/GetLatestVersion
-- **Python3**
-```python
-import http.client
+#### Code Snippets : api/versions/GetLatestVersion
+- **Kotlin: OkHTTP3**
+```kotlin
+import okhttp3.RequestBody.Companion.toRequestBody
 
-conn = http.client.HTTPConnection("http://routine-explorer.herokuapp.com")
-
-headers = {
-    'Accept': "*/*",
-    'Cache-Control': "no-cache",
-    'Host': "http://routine-explorer.herokuapp.com",
-    'Accept-Encoding': "gzip, deflate",
-    'Connection': "keep-alive",
-    'cache-control': "no-cache"
-    }
-
-conn.request("GET", "api,versions,GetLatestVersion", headers=headers)
-
-res = conn.getresponse()
-data = res.read()
-
-print(data.decode("utf-8"))
-```
-- **Java OK HTTP**
-```java
-OkHttpClient client = new OkHttpClient();
-
-Request request = new Request.Builder()
-  .url("http://routine-explorer.herokuapp.com/api/versions/GetLatestVersion")
-  .get()
-  .addHeader("Accept", "*/*")
-  .addHeader("Cache-Control", "no-cache")
-  .addHeader("Host", "http://routine-explorer.herokuapp.com")
-  .addHeader("Accept-Encoding", "gzip, deflate")
-  .addHeader("Connection", "keep-alive")
-  .addHeader("cache-control", "no-cache")
-  .build();
-
-Response response = client.newCall(request).execute();
+fun main(args: Array<String>) {
+    var client = OkHttpClient()
+    var request = Request.Builder()
+    .url("http://routine-explorer.herokuapp.com/api/versions/GetLatestVersion")
+    .get()
+    .addHeader("Accept", "*/*")
+    .addHeader("Cache-Control", "no-cache")
+    .addHeader("Host", "http://routine-explorer.herokuapp.com")
+    .addHeader("Accept-Encoding", "gzip, deflate")
+    .addHeader("Connection", "keep-alive")
+    .addHeader("cache-control", "no-cache")
+    .build()
+    var response = client.newCall(request).execute()
+}
 ```
 
+- **Flutter: ([HTTP](https://pub.dev/packages/http))**
+```dart
+import 'package:http/http.dart' as http;
 
-- **C# REST**
+var url = 'http://routine-explorer.herokuapp.com/api/versions/GetLatestVersion';
+var response = await http.get(url);
+print('Response body: ${response.body}');
+```
+
+- **Xamarin ([RestSharp](https://www.nuget.org/packages/RestSharp))**
 ```c#
 var client = new RestClient("http://routine-explorer.herokuapp.com/api/versions/GetLatestVersion");
 var request = new RestRequest(Method.GET);
@@ -191,7 +171,9 @@ Then you will get a response which is an array of object returning the unused ro
         "status": null
 }]
 ```
-#### HTTP Request Snippet Example
+#### Code Snippets : /api/vacant
+
+- **HTTP Request Snippet Example**
 ```http request
 POST /api/vacant HTTP/1.1
 Host: http://routine-explorer.herokuapp.com
@@ -211,4 +193,54 @@ cache-control: no-cache
     "timeOfUpload": "2020-01-23T23:27:22.8211125"
 }
 ```
+- **Kotlin: OkHTTP3**
+```kotlin
+import okhttp3.RequestBody.Companion.toRequestBody
 
+fun main(args: Array<String>) {
+    var client = OkHttpClient()
+    var mediaType = MediaType.parse("application/json")
+    var body = RequestBody.create(mediaType, "{\n \"id\": 1,\n \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n \"statusOfPublish\": true,\n \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n}")
+    var request = Request.Builder()
+    .url("http://routine-explorer.herokuapp.com/api/vacant")
+    .post(body)
+    .addHeader("Content-Type", "application/json")
+    .addHeader("Accept", "*/*")
+    .addHeader("Cache-Control", "no-cache")
+    .addHeader("Host", "http://routine-explorer.herokuapp.com")
+    .addHeader("Accept-Encoding", "gzip, deflate")
+    .addHeader("Content-Length", "147")
+    .addHeader("Connection", "keep-alive")
+    .addHeader("cache-control", "no-cache")
+    .build()
+    var response = client.newCall(request).execute()
+}
+```
+
+- **Flutter: ([HTTP](https://pub.dev/packages/http))**
+```dart
+import 'package:http/http.dart' as http;
+
+var url = 'http://routine-explorer.herokuapp.com/api/vacant';
+var response = await http.post(url, body: {
+                                      'id': 1,
+                                      'nameOfFilesUploaded': 'Spring 2020 Version-2',
+                                      'statusOfPublish': true,
+                                      'timeOfUpload': '2020-01-23T23:27:22.8211125'
+                                      });
+print('Response body: ${response.body}');
+```
+```c#
+var client = new RestClient("http://routine-explorer.herokuapp.com/api/vacant");
+var request = new RestRequest(Method.POST);
+request.AddHeader("cache-control", "no-cache");
+request.AddHeader("Connection", "keep-alive");
+request.AddHeader("Content-Length", "147");
+request.AddHeader("Accept-Encoding", "gzip, deflate");
+request.AddHeader("Host", "http://routine-explorer.herokuapp.com");
+request.AddHeader("Cache-Control", "no-cache");
+request.AddHeader("Accept", "*/*");
+request.AddHeader("Content-Type", "application/json");
+request.AddParameter("status", "{\n    \"id\": 1,\n    \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n    \"statusOfPublish\": true,\n    \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n}", ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+```
