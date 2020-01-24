@@ -12,6 +12,18 @@ applications like:
 
 Rest of the part of this documentation will be discussed on module-wise API so that
 people willing to built applications for the Dept. of SWE, can gather some idea on how to use these APIs.
+Currently available APIs are:
+- [Get all available routines](#get-version-status-of-all-available-routines)
+- [Find latest routine version](#get-the-latest-version-status-among-all-available-routines)
+- [Get unused rooms](#find-all-unused-rooms-by-version-status)
+- [Find all class schedules](#get-all-class-schedules-of-a-specific-routines-version-status)
+- [Get schedule by subjects](#find-class-schedule-by-courses-and-a-specific-routines-version-status)
+- [Find schedule by teacher initials](#find-class-schedule-of-teacher-by-initial-and-a-specific-routines-version-status)
+
+In addition, there are some example code snippets to understand how to deal with these APIs. Code snippets are available in:
+- **Kotlin** (OK HTTP3)
+- **Flutter** (http)
+- **Xamarin** (C# RestSharp)
 
 ### GET version-status of all available routines
 
