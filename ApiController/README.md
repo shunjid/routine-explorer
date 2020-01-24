@@ -483,7 +483,7 @@ For example, if you hit a `POST` request:
 
 -   at localhost - `http://localhost:5000/api/routine/GetScheduleForTeacher`
 -   at heroku - `http://routine-explorer.herokuapp.com/api/routine/GetScheduleForTeacher`
-    and include a **subjects** object to the body like:
+    and include a **teacher** object to the body like:
 
 ```json
 {
