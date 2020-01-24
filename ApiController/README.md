@@ -451,6 +451,32 @@ Then you will get a response which is an array of object returning the class sch
 
 #### Code Snippets : /api/routine/GetRoutineByCourses
 
+-   **Kotlin: OkHTTP3**
+
+```kotlin
+import okhttp3.RequestBody.Companion.toRequestBody
+
+fun main(args: Array) {
+    var client = OkHttpClient()
+    var mediaType = MediaType.parse("application/json")
+    var body = RequestBody.create(mediaType, "{\n\t\"subject01\": \"SWE422A\",\n\t\"subject02\": null,\n\t\"subject03\": \"SWE425A\",\n\t\"subject04\": null,\n\t\"subject05\": null,\n\t\"status\" : {\n\t\t\t     \"id\": 1,\n\t\t\t     \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n\t\t\t     \"statusOfPublish\": true,\n\t\t\t     \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n\t\t\t   }\n}")
+    var request = Request.Builder()
+    .url("http://routine-explorer.herokuapp.com/api/routine/GetRoutineByCourses")
+    .post(body)
+    .addHeader("Content-Type", "application/json")
+    .addHeader("Accept", "*/*")
+    .addHeader("Cache-Control", "no-cache")
+    .addHeader("Host", "http://routine-explorer.herokuapp.com")
+    .addHeader("Accept-Encoding", "gzip, deflate")
+    .addHeader("Content-Length", "295")
+    .addHeader("Connection", "keep-alive")
+    .addHeader("cache-control", "no-cache")
+    .build()
+    var response = client.newCall(request).execute()
+}
+```
+
+
 -   **Flutter: ([HTTP](https://pub.dev/packages/http))**
 
 ```dart
@@ -472,7 +498,22 @@ var response = await http.get(url, body: {
                                          });
 print('Response body: ${response.body}');
 ```
+-   **Xamarin ([RestSharp](https://www.nuget.org/packages/RestSharp))**
 
+```c#
+var client = new RestClient("http://routine-explorer.herokuapp.com/api/routine/GetRoutineByCourses");
+var request = new RestRequest(Method.POST);
+request.AddHeader("cache-control", "no-cache");
+request.AddHeader("Connection", "keep-alive");
+request.AddHeader("Content-Length", "295");
+request.AddHeader("Accept-Encoding", "gzip, deflate");
+request.AddHeader("Host", "localhost:5000");
+request.AddHeader("Cache-Control", "no-cache");
+request.AddHeader("Accept", "*/*");
+request.AddHeader("Content-Type", "application/json");
+request.AddParameter("undefined", "{\n\t\"subject01\": \"SWE422A\",\n\t\"subject02\": null,\n\t\"subject03\": \"SWE425A\",\n\t\"subject04\": null,\n\t\"subject05\": null,\n\t\"status\" : {\n\t\t\t     \"id\": 1,\n\t\t\t     \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n\t\t\t     \"statusOfPublish\": true,\n\t\t\t     \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n\t\t\t   }\n}", ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
+```
 
 ## Find class schedule of teacher by initial (Routine Version Wise)
 
@@ -523,6 +564,31 @@ Then you will get a response which is an array of object returning the class sch
 
 #### Code Snippets : /api/routine/GetScheduleForTeacher
 
+-   **Kotlin: OkHTTP3**
+
+```kotlin
+import okhttp3.RequestBody.Companion.toRequestBody
+
+fun main(args: Array) {
+    var client = OkHttpClient()
+    var mediaType = MediaType.parse("application/json")
+    var body = RequestBody.create(mediaType, "{\n\t\"TeacherInitial\": \"MAH\",\n\t\"status\" : {\n\t\t\t     \"id\": 1,\n\t\t\t     \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n\t\t\t     \"statusOfPublish\": true,\n\t\t\t     \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n\t\t\t   }\n}")
+    var request = Request.Builder()
+    .url("http://routine-explorer.herokuapp.com/api/routine/GetScheduleForTeacher")
+    .post(body)
+    .addHeader("Content-Type", "application/json")
+    .addHeader("Accept", "*/*")
+    .addHeader("Cache-Control", "no-cache")
+    .addHeader("Host", "http://routine-explorer.herokuapp.com")
+    .addHeader("Accept-Encoding", "gzip, deflate")
+    .addHeader("Content-Length", "211")
+    .addHeader("Connection", "keep-alive")
+    .addHeader("cache-control", "no-cache")
+    .build()
+    var response = client.newCall(request).execute()
+}
+```
+
 -   **Flutter: ([HTTP](https://pub.dev/packages/http))**
 
 ```dart
@@ -536,7 +602,24 @@ var response = await http.get(url, body: {
                                          			'nameOfFilesUploaded': 'Spring 2020 Version-2',
                                          			'statusOfPublish': true,
                                          			'timeOfUpload': '2020-01-23T23:27:22.8211125'
-                                         		}
+                                         		    }
                                          });
 print('Response body: ${response.body}');
+```
+
+-   **Xamarin ([RestSharp](https://www.nuget.org/packages/RestSharp))**
+
+```c#
+var client = new RestClient("http://routine-explorer.herokuapp.com/api/routine/GetScheduleForTeacher");
+var request = new RestRequest(Method.POST);
+request.AddHeader("cache-control", "no-cache");
+request.AddHeader("Connection", "keep-alive");
+request.AddHeader("Content-Length", "211");
+request.AddHeader("Accept-Encoding", "gzip, deflate");
+request.AddHeader("Host", "localhost:5000");
+request.AddHeader("Cache-Control", "no-cache");
+request.AddHeader("Accept", "*/*");
+request.AddHeader("Content-Type", "application/json");
+request.AddParameter("undefined", "{\n\t\"TeacherInitial\": \"MAH\",\n\t\"status\" : {\n\t\t\t     \"id\": 1,\n\t\t\t     \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n\t\t\t     \"statusOfPublish\": true,\n\t\t\t     \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n\t\t\t   }\n}", ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
 ```
