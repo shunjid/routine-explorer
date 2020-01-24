@@ -2,4 +2,400 @@
     ViewData["Title"] = "API-Routine Explorer";
 }
 
-<h1>Hi</h1>
+        <link href=~/css/code.css rel=stylesheet><body id=preview><h1 class=code-line data-line-end=1 data-line-start=0><a id=API__Routine_Explorer_0></a>API : Routine Explorer</h1><p class=has-line-data data-line-end=6 data-line-start=2>Routine explorer is a free and open source application that helps finding<br>class schedule of the Department of Software Engineering of Daffodil International<br>University in a <strong>6 x 6 Grid</strong>. In it’s v3.0 it has arrive with API so that some other<br>applications like:<ul><li class=has-line-data data-line-end=8 data-line-start=7>Room booking (By using the data of unused rooms)<li class=has-line-data data-line-end=9 data-line-start=8>Weekly class tracking of each room<li class=has-line-data data-line-end=10 data-line-start=9>Schedule maker of teachers using initials<li class=has-line-data data-line-end=12 data-line-start=10>Most importantly “MOBILE” applications can be built.</ul><p class=has-line-data data-line-end=15 data-line-start=12>Rest of the part of this documentation will be discussed on module-wise API so that<br>people willing to built applications for the Dept. of SWE, can gather some idea on how to use these APIs.<br>Currently available APIs are:<ul><li class=has-line-data data-line-end=16 data-line-start=15><a href=#get-version-status-of-all-available-routines>Get all available routines</a><li class=has-line-data data-line-end=17 data-line-start=16><a href=#get-the-latest-version-status-among-all-available-routines>Find latest routine version</a><li class=has-line-data data-line-end=18 data-line-start=17><a href=#find-all-unused-rooms-by-version-status>Get unused rooms</a><li class=has-line-data data-line-end=19 data-line-start=18><a href=#get-all-class-schedules-of-a-specific-routines-version-status>Find all class schedules</a><li class=has-line-data data-line-end=20 data-line-start=19><a href=#find-class-schedule-by-courses-and-a-specific-routines-version-status>Get schedule by subjects</a><li class=has-line-data data-line-end=22 data-line-start=20><a href=#find-class-schedule-of-teacher-by-initial-and-a-specific-routines-version-status>Find schedule by teacher initials</a></ul><p class=has-line-data data-line-end=23 data-line-start=22>In addition, there are some example code snippets to understand how to deal with these APIs. Code snippets are available in:<ul><li class=has-line-data data-line-end=24 data-line-start=23><strong>Kotlin</strong> (OK HTTP3)<li class=has-line-data data-line-end=25 data-line-start=24><strong>Flutter</strong> (http)<li class=has-line-data data-line-end=27 data-line-start=25><strong>Xamarin</strong> (C# RestSharp)</ul><h3 class=code-line data-line-end=28 data-line-start=27><a id=GET_versionstatus_of_all_available_routines_27></a>GET version-status of all available routines</h3><p class=has-line-data data-line-end=31 data-line-start=29>To get the <strong>list</strong> of routines of different versions, you need to hit the api at <code>api/versions</code>. For example, if you hit a<br><code>GET</code> request:<ul><li class=has-line-data data-line-end=33 data-line-start=32>at localhost - <code>http://localhost:5000/api/versions</code><li class=has-line-data data-line-end=35 data-line-start=33>at heroku - <code>http://routine-explorer.herokuapp.com/api/versions</code></ul><p class=has-line-data data-line-end=36 data-line-start=35>After successful execution server will respond with an <strong>Array of Objects</strong> like below :<pre><code class=has-line-data class=language-json data-line-end=47 data-line-start=38>[
+            {
+                "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>1</span></span>,
+                "<span class=hljs-attribute>nameOfFilesUploaded</span>": <span class=hljs-value><span class=hljs-string>"Spring 2020 Version-2"</span></span>,
+                "<span class=hljs-attribute>statusOfPublish</span>": <span class=hljs-value><span class=hljs-literal>true</span></span>,
+                "<span class=hljs-attribute>timeOfUpload</span>": <span class=hljs-value><span class=hljs-string>"2020-01-23T23:27:22.8211125"</span>
+            </span>}
+        ]
+        </code></pre><h4 class=code-line data-line-end=49 data-line-start=48><a id=Code_Snippets__apiversions_48></a>Code Snippets : api/versions</h4><p class=has-line-data data-line-end=52 data-line-start=50>Here are some code snippets that might help you dealing with the API at<br><code>api/versions</code>:<ul><li class=has-line-data data-line-end=55 data-line-start=53><strong>Kotlin: OkHTTP3</strong></ul><pre><code class=has-line-data class=language-kotlin data-line-end=75 data-line-start=56><span class=hljs-keyword>import</span> okhttp3.RequestBody.Companion.toRequestBody
+        
+        <span class=hljs-function><span class=hljs-keyword>fun</span> <span class=hljs-title>main</span><span class=hljs-params>(args: <span class=hljs-typename>Array</span>)</span> {</span>
+            <span class=hljs-variable><span class=hljs-keyword>var</span> client</span> = OkHttpClient()
+        
+            <span class=hljs-variable><span class=hljs-keyword>var</span> request</span> = Request.Builder()
+            .url(<span class=hljs-string>"http://routine-explorer.herokuapp.com/api/versions"</span>)
+            .<span class=hljs-keyword>get</span>()
+            .addHeader(<span class=hljs-string>"Accept"</span>, <span class=hljs-string>"*/*"</span>)
+            .addHeader(<span class=hljs-string>"Cache-Control"</span>, <span class=hljs-string>"no-cache"</span>)
+            .addHeader(<span class=hljs-string>"Host"</span>, <span class=hljs-string>"http://routine-explorer.herokuapp.com"</span>)
+            .addHeader(<span class=hljs-string>"Accept-Encoding"</span>, <span class=hljs-string>"gzip, deflate"</span>)
+            .addHeader(<span class=hljs-string>"Connection"</span>, <span class=hljs-string>"keep-alive"</span>)
+            .addHeader(<span class=hljs-string>"cache-control"</span>, <span class=hljs-string>"no-cache"</span>)
+            .build()
+        
+            <span class=hljs-variable><span class=hljs-keyword>var</span> response</span> = client.newCall(request).execute()   
+        }
+        </code></pre><ul><li class=has-line-data data-line-end=78 data-line-start=76><strong>Flutter: (<a href=https://pub.dev/packages/http#-readme-tab->HTTP</a>)</strong></ul><pre><code class=has-line-data class=language-dart data-line-end=85 data-line-start=79><span class=hljs-literal>import</span> <span class=hljs-string>'package:http/http.dart'</span> <span class=hljs-literal>as</span> http;
+        
+        <span class=hljs-keyword>var</span> url = <span class=hljs-string>'http://routine-explorer.herokuapp.com/api/versions'</span>;
+        <span class=hljs-keyword>var</span> response = await http.<span class=hljs-literal>get</span>(url);
+        <span class=hljs-built_in>print</span>(<span class=hljs-string>'Response body: <span class=hljs-subst>${response.body}</span>'</span>);
+        </code></pre><ul><li class=has-line-data data-line-end=88 data-line-start=86><strong>Xamarin (<a href=https://www.nuget.org/packages/RestSharp>RestSharp</a>)</strong></ul><pre><code class="has-line-data language-csharp"data-line-end=99 data-line-start=89>var client = new RestClient("http://routine-explorer.herokuapp.com/api/versions");
+        var request = new RestRequest(Method.GET);
+        request.AddHeader("cache-control", "no-cache");
+        request.AddHeader("Connection", "keep-alive");
+        request.AddHeader("Accept-Encoding", "gzip, deflate");
+        request.AddHeader("Host", "http://routine-explorer.herokuapp.com");
+        request.AddHeader("Cache-Control", "no-cache");
+        request.AddHeader("Accept", "*/*");
+        IRestResponse response = client.Execute(request);
+        </code></pre><h3 class=code-line data-line-end=101 data-line-start=100><a id=GET_the_latest_versionstatus_among_all_available_routines_100></a>GET the latest version-status among all available routines</h3><p class=has-line-data data-line-end=104 data-line-start=102>To get the latest version of routine object you need to hit the api at <code>api/versions/GetLatestVersion</code>. For example, if you hit a<br><code>GET</code> request:<ul><li class=has-line-data data-line-end=106 data-line-start=105>at localhost - <code>http://localhost:5000/api/versions/GetLatestVersion</code><li class=has-line-data data-line-end=109 data-line-start=106>at heroku - <code>http://routine-explorer.herokuapp.com/api/versions/GetLatestVersion</code><br>Then a successful execution will respond with a single object like JSON snippet below :</ul><pre><code class=has-line-data class=language-json data-line-end=117 data-line-start=110>    {
+                "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>1</span></span>,
+                "<span class=hljs-attribute>nameOfFilesUploaded</span>": <span class=hljs-value><span class=hljs-string>"Spring 2020 Version-2"</span></span>,
+                "<span class=hljs-attribute>statusOfPublish</span>": <span class=hljs-value><span class=hljs-literal>true</span></span>,
+                "<span class=hljs-attribute>timeOfUpload</span>": <span class=hljs-value><span class=hljs-string>"2020-01-23T23:27:22.8211125"</span>
+            </span>}
+        </code></pre><h4 class=code-line data-line-end=119 data-line-start=118><a id=Code_Snippets__apiversionsGetLatestVersion_118></a>Code Snippets : api/versions/GetLatestVersion</h4><ul><li class=has-line-data data-line-end=122 data-line-start=120><strong>Kotlin: OkHTTP3</strong></ul><pre><code class=has-line-data class=language-kotlin data-line-end=140 data-line-start=123><span class=hljs-keyword>import</span> okhttp3.RequestBody.Companion.toRequestBody
+        
+        <span class=hljs-function><span class=hljs-keyword>fun</span> <span class=hljs-title>main</span><span class=hljs-params>(args: <span class=hljs-typename>Array</span>)</span> {</span>
+            <span class=hljs-variable><span class=hljs-keyword>var</span> client</span> = OkHttpClient()
+            <span class=hljs-variable><span class=hljs-keyword>var</span> request</span> = Request.Builder()
+            .url(<span class=hljs-string>"http://routine-explorer.herokuapp.com/api/versions/GetLatestVersion"</span>)
+            .<span class=hljs-keyword>get</span>()
+            .addHeader(<span class=hljs-string>"Accept"</span>, <span class=hljs-string>"*/*"</span>)
+            .addHeader(<span class=hljs-string>"Cache-Control"</span>, <span class=hljs-string>"no-cache"</span>)
+            .addHeader(<span class=hljs-string>"Host"</span>, <span class=hljs-string>"http://routine-explorer.herokuapp.com"</span>)
+            .addHeader(<span class=hljs-string>"Accept-Encoding"</span>, <span class=hljs-string>"gzip, deflate"</span>)
+            .addHeader(<span class=hljs-string>"Connection"</span>, <span class=hljs-string>"keep-alive"</span>)
+            .addHeader(<span class=hljs-string>"cache-control"</span>, <span class=hljs-string>"no-cache"</span>)
+            .build()
+            <span class=hljs-variable><span class=hljs-keyword>var</span> response</span> = client.newCall(request).execute()
+        }
+        </code></pre><ul><li class=has-line-data data-line-end=143 data-line-start=141><strong>Flutter: (<a href=https://pub.dev/packages/http>HTTP</a>)</strong></ul><pre><code class=has-line-data class=language-dart data-line-end=150 data-line-start=144><span class=hljs-literal>import</span> <span class=hljs-string>'package:http/http.dart'</span> <span class=hljs-literal>as</span> http;
+        
+        <span class=hljs-keyword>var</span> url = <span class=hljs-string>'http://routine-explorer.herokuapp.com/api/versions/GetLatestVersion'</span>;
+        <span class=hljs-keyword>var</span> response = await http.<span class=hljs-literal>get</span>(url);
+        <span class=hljs-built_in>print</span>(<span class=hljs-string>'Response body: <span class=hljs-subst>${response.body}</span>'</span>);
+        </code></pre><ul><li class=has-line-data data-line-end=153 data-line-start=151><strong>Xamarin (<a href=https://www.nuget.org/packages/RestSharp>RestSharp</a>)</strong></ul><pre><code class=has-line-data class=language-c# data-line-end=164 data-line-start=154>var client = new RestClient("http://routine-explorer.herokuapp.com/api/versions/GetLatestVersion");
+        var request = new RestRequest(Method.GET);
+        request.AddHeader("cache-control", "no-cache");
+        request.AddHeader("Connection", "keep-alive");
+        request.AddHeader("Accept-Encoding", "gzip, deflate");
+        request.AddHeader("Host", "http://routine-explorer.herokuapp.com");
+        request.AddHeader("Cache-Control", "no-cache");
+        request.AddHeader("Accept", "*/*");
+        IRestResponse response = client.Execute(request);
+        </code></pre><h3 class=code-line data-line-end=166 data-line-start=165><a id=Find_all_unused_rooms_by_versionstatus_165></a>Find all unused rooms by version-status</h3><p class=has-line-data data-line-end=169 data-line-start=167>In this context, you <code>POST</code> to the <code>api/vacant</code><br>and include a Routine-Version object to the body from the previous context.<p class=has-line-data data-line-end=171 data-line-start=170>For example, if you hit a <code>POST</code> request:<ul><li class=has-line-data data-line-end=173 data-line-start=172>at localhost - <code>http://localhost:5000/api/vacant</code><li class=has-line-data data-line-end=176 data-line-start=173>at heroku - <code>http://routine-explorer.herokuapp.com/api/vacant</code><br>and include a Routine-Version object to the body like:</ul><pre><code class=has-line-data class=language-json data-line-end=184 data-line-start=177>{
+            "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>1</span></span>,
+            "<span class=hljs-attribute>nameOfFilesUploaded</span>": <span class=hljs-value><span class=hljs-string>"Spring 2020 Version-2"</span></span>,
+            "<span class=hljs-attribute>statusOfPublish</span>": <span class=hljs-value><span class=hljs-literal>true</span></span>,
+            "<span class=hljs-attribute>timeOfUpload</span>": <span class=hljs-value><span class=hljs-string>"2020-01-23T23:27:22.8211125"</span>
+        </span>}
+        </code></pre><p class=has-line-data data-line-end=186 data-line-start=185>Then you will get a response which is an array of object returning the unused rooms in that routine version you requested from the body like:<pre><code class=has-line-data class=language-json data-line-end=204 data-line-start=188>[
+            {
+                "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>1</span></span>,
+                "<span class=hljs-attribute>roomNumber</span>": <span class=hljs-value><span class=hljs-string>"505AB"</span></span>,
+                "<span class=hljs-attribute>dayOfWeek</span>": <span class=hljs-value><span class=hljs-string>"Wednesday"</span></span>,
+                "<span class=hljs-attribute>timeRange</span>": <span class=hljs-value><span class=hljs-string>"10:00-11:30"</span></span>,
+                "<span class=hljs-attribute>status</span>": <span class=hljs-value><span class=hljs-literal>null</span>
+            </span>},
+            {
+                "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>2</span></span>,
+                "<span class=hljs-attribute>roomNumber</span>": <span class=hljs-value><span class=hljs-string>"505AB"</span></span>,
+                "<span class=hljs-attribute>dayOfWeek</span>": <span class=hljs-value><span class=hljs-string>"Wednesday"</span></span>,
+                "<span class=hljs-attribute>timeRange</span>": <span class=hljs-value><span class=hljs-string>"08:30-10:00"</span></span>,
+                "<span class=hljs-attribute>status</span>": <span class=hljs-value><span class=hljs-literal>null</span>
+        </span>}]
+        </code></pre><h4 class=code-line data-line-end=206 data-line-start=205><a id=Code_Snippets__apivacant_205></a>Code Snippets : /api/vacant</h4><ul><li class=has-line-data data-line-end=209 data-line-start=207><strong>HTTP Request Snippet Example</strong></ul><pre><code class=has-line-data class=language-http data-line-end=228 data-line-start=210><span class=hljs-request>POST <span class=hljs-string>/api/vacant</span> HTTP/1.1</span>
+        <span class=hljs-attribute>Host</span>: <span class=hljs-string>http://routine-explorer.herokuapp.com</span>
+        <span class=hljs-attribute>Content-Type</span>: <span class=hljs-string>application/json</span>
+        <span class=hljs-attribute>Accept</span>: <span class=hljs-string>*/*</span>
+        <span class=hljs-attribute>Cache-Control</span>: <span class=hljs-string>no-cache</span>
+        <span class=hljs-attribute>Host</span>: <span class=hljs-string>http://routine-explorer.herokuapp.com</span>
+        <span class=hljs-attribute>Accept-Encoding</span>: <span class=hljs-string>gzip, deflate</span>
+        <span class=hljs-attribute>Content-Length</span>: <span class=hljs-string>147</span>
+        <span class=hljs-attribute>Connection</span>: <span class=hljs-string>keep-alive</span>
+        <span class=hljs-attribute>cache-control</span>: <span class=hljs-string>no-cache</span>
+        
+        <span class=json>{
+            "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>1</span></span>,
+            "<span class=hljs-attribute>nameOfFilesUploaded</span>": <span class=hljs-value><span class=hljs-string>"Spring 2020 Version-2"</span></span>,
+            "<span class=hljs-attribute>statusOfPublish</span>": <span class=hljs-value><span class=hljs-literal>true</span></span>,
+            "<span class=hljs-attribute>timeOfUpload</span>": <span class=hljs-value><span class=hljs-string>"2020-01-23T23:27:22.8211125"</span>
+        </span>}
+        </span></code></pre><ul><li class=has-line-data data-line-end=231 data-line-start=229><strong>Kotlin: OkHTTP3</strong></ul><pre><code class=has-line-data class=language-kotlin data-line-end=253 data-line-start=232><span class=hljs-keyword>import</span> okhttp3.RequestBody.Companion.toRequestBody
+        
+        <span class=hljs-function><span class=hljs-keyword>fun</span> <span class=hljs-title>main</span><span class=hljs-params>(args: <span class=hljs-typename>Array</span>)</span> {</span>
+            <span class=hljs-variable><span class=hljs-keyword>var</span> client</span> = OkHttpClient()
+            <span class=hljs-variable><span class=hljs-keyword>var</span> mediaType</span> = MediaType.parse(<span class=hljs-string>"application/json"</span>)
+            <span class=hljs-variable><span class=hljs-keyword>var</span> body</span> = RequestBody.create(mediaType, <span class=hljs-string>"{\n \"id\": 1,\n \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n \"statusOfPublish\": true,\n \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n}"</span>)
+            <span class=hljs-variable><span class=hljs-keyword>var</span> request</span> = Request.Builder()
+            .url(<span class=hljs-string>"http://routine-explorer.herokuapp.com/api/vacant"</span>)
+            .post(body)
+            .addHeader(<span class=hljs-string>"Content-Type"</span>, <span class=hljs-string>"application/json"</span>)
+            .addHeader(<span class=hljs-string>"Accept"</span>, <span class=hljs-string>"*/*"</span>)
+            .addHeader(<span class=hljs-string>"Cache-Control"</span>, <span class=hljs-string>"no-cache"</span>)
+            .addHeader(<span class=hljs-string>"Host"</span>, <span class=hljs-string>"http://routine-explorer.herokuapp.com"</span>)
+            .addHeader(<span class=hljs-string>"Accept-Encoding"</span>, <span class=hljs-string>"gzip, deflate"</span>)
+            .addHeader(<span class=hljs-string>"Content-Length"</span>, <span class=hljs-string>"147"</span>)
+            .addHeader(<span class=hljs-string>"Connection"</span>, <span class=hljs-string>"keep-alive"</span>)
+            .addHeader(<span class=hljs-string>"cache-control"</span>, <span class=hljs-string>"no-cache"</span>)
+            .build()
+            <span class=hljs-variable><span class=hljs-keyword>var</span> response</span> = client.newCall(request).execute()
+        }
+        </code></pre><ul><li class=has-line-data data-line-end=256 data-line-start=254><strong>Flutter: (<a href=https://pub.dev/packages/http>HTTP</a>)</strong></ul><pre><code class=has-line-data class=language-dart data-line-end=268 data-line-start=257><span class=hljs-literal>import</span> <span class=hljs-string>'package:http/http.dart'</span> <span class=hljs-literal>as</span> http;
+        
+        <span class=hljs-keyword>var</span> url = <span class=hljs-string>'http://routine-explorer.herokuapp.com/api/vacant'</span>;
+        <span class=hljs-keyword>var</span> response = await http.post(url, body: {
+                                              <span class=hljs-string>'id'</span>: <span class=hljs-number>1</span>,
+                                              <span class=hljs-string>'nameOfFilesUploaded'</span>: <span class=hljs-string>'Spring 2020 Version-2'</span>,
+                                              <span class=hljs-string>'statusOfPublish'</span>: <span class=hljs-keyword>true</span>,
+                                              <span class=hljs-string>'timeOfUpload'</span>: <span class=hljs-string>'2020-01-23T23:27:22.8211125'</span>
+                                              });
+        <span class=hljs-built_in>print</span>(<span class=hljs-string>'Response body: <span class=hljs-subst>${response.body}</span>'</span>);
+        </code></pre><ul><li class=has-line-data data-line-end=271 data-line-start=269><strong>Xamarin (<a href=https://www.nuget.org/packages/RestSharp>RestSharp</a>)</strong></ul><pre><code class=has-line-data class=language-c# data-line-end=285 data-line-start=272>var client = new RestClient("http://routine-explorer.herokuapp.com/api/vacant");
+        var request = new RestRequest(Method.POST);
+        request.AddHeader("cache-control", "no-cache");
+        request.AddHeader("Connection", "keep-alive");
+        request.AddHeader("Content-Length", "147");
+        request.AddHeader("Accept-Encoding", "gzip, deflate");
+        request.AddHeader("Host", "http://routine-explorer.herokuapp.com");
+        request.AddHeader("Cache-Control", "no-cache");
+        request.AddHeader("Accept", "*/*");
+        request.AddHeader("Content-Type", "application/json");
+        request.AddParameter("status", "{\n    \"id\": 1,\n    \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n    \"statusOfPublish\": true,\n    \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n}", ParameterType.RequestBody);
+        IRestResponse response = client.Execute(request);
+        </code></pre><h3 class=code-line data-line-end=287 data-line-start=286><a id=GET_all_class_schedules_of_a_specific_routines_versionstatus_286></a>GET all class schedules of a specific routine’s version-status</h3><p class=has-line-data data-line-end=290 data-line-start=288>In this context, you hit <code>GET</code> to the <code>api/routine</code><br>and include a Routine-Version object.<p class=has-line-data data-line-end=292 data-line-start=291>For example, if you hit a <code>GET</code> request:<ul><li class=has-line-data data-line-end=294 data-line-start=293>at localhost - <code>http://localhost:5000/api/routine</code><li class=has-line-data data-line-end=297 data-line-start=294>at heroku - <code>http://routine-explorer.herokuapp.com/api/routine</code><br>and include a Routine-Version object to the body like:</ul><pre><code class=has-line-data class=language-json data-line-end=305 data-line-start=298>{
+            "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>1</span></span>,
+            "<span class=hljs-attribute>nameOfFilesUploaded</span>": <span class=hljs-value><span class=hljs-string>"Spring 2020 Version-2"</span></span>,
+            "<span class=hljs-attribute>statusOfPublish</span>": <span class=hljs-value><span class=hljs-literal>true</span></span>,
+            "<span class=hljs-attribute>timeOfUpload</span>": <span class=hljs-value><span class=hljs-string>"2020-01-23T23:27:22.8211125"</span>
+        </span>}
+        </code></pre><p class=has-line-data data-line-end=307 data-line-start=306>Then you will get a response which is an array of object returning the class schedules in that routine version you requested from the body like:<pre><code class=has-line-data class=language-json data-line-end=330 data-line-start=309>[
+            {
+                    "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>1</span></span>,
+                    "<span class=hljs-attribute>roomNumber</span>": <span class=hljs-value><span class=hljs-string>"601AB"</span></span>,
+                    "<span class=hljs-attribute>courseCode</span>": <span class=hljs-value><span class=hljs-string>"CS312A"</span></span>,
+                    "<span class=hljs-attribute>teacher</span>": <span class=hljs-value><span class=hljs-string>"MAR"</span></span>,
+                    "<span class=hljs-attribute>dayOfWeek</span>": <span class=hljs-value><span class=hljs-string>"Saturday"</span></span>,
+                    "<span class=hljs-attribute>timeRange</span>": <span class=hljs-value><span class=hljs-string>"02:30-04:00"</span></span>,
+                    "<span class=hljs-attribute>status</span>": <span class=hljs-value><span class=hljs-literal>null</span>
+                </span>},
+                {
+                    "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>2</span></span>,
+                    "<span class=hljs-attribute>roomNumber</span>": <span class=hljs-value><span class=hljs-string>"305AB"</span></span>,
+                    "<span class=hljs-attribute>courseCode</span>": <span class=hljs-value><span class=hljs-string>"ENG101A"</span></span>,
+                    "<span class=hljs-attribute>teacher</span>": <span class=hljs-value><span class=hljs-string>"SM"</span></span>,
+                    "<span class=hljs-attribute>dayOfWeek</span>": <span class=hljs-value><span class=hljs-string>"Tuesday"</span></span>,
+                    "<span class=hljs-attribute>timeRange</span>": <span class=hljs-value><span class=hljs-string>"10:00-11:30"</span></span>,
+                    "<span class=hljs-attribute>status</span>": <span class=hljs-value><span class=hljs-literal>null</span>
+                </span>}
+        ]
+        </code></pre><h4 class=code-line data-line-end=332 data-line-start=331><a id=Code_Snippets__apiroutine_331></a>Code Snippets : /api/routine</h4><ul><li class=has-line-data data-line-end=335 data-line-start=333><strong>HTTP Request Snippet Example</strong></ul><pre><code class=has-line-data class=language-http data-line-end=354 data-line-start=336><span class=hljs-request>GET <span class=hljs-string>/api/routine</span> HTTP/1.1</span>
+        <span class=hljs-attribute>Host</span>: <span class=hljs-string>http://routine-explorer.herokuapp.com</span>
+        <span class=hljs-attribute>Content-Type</span>: <span class=hljs-string>application/json</span>
+        <span class=hljs-attribute>Accept</span>: <span class=hljs-string>*/*</span>
+        <span class=hljs-attribute>Cache-Control</span>: <span class=hljs-string>no-cache</span>
+        <span class=hljs-attribute>Host</span>: <span class=hljs-string>http://routine-explorer.herokuapp.com</span>
+        <span class=hljs-attribute>Accept-Encoding</span>: <span class=hljs-string>gzip, deflate</span>
+        <span class=hljs-attribute>Content-Length</span>: <span class=hljs-string>147</span>
+        <span class=hljs-attribute>Connection</span>: <span class=hljs-string>keep-alive</span>
+        <span class=hljs-attribute>cache-control</span>: <span class=hljs-string>no-cache</span>
+        
+        <span class=json>{
+            "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>1</span></span>,
+            "<span class=hljs-attribute>nameOfFilesUploaded</span>": <span class=hljs-value><span class=hljs-string>"Spring 2020 Version-2"</span></span>,
+            "<span class=hljs-attribute>statusOfPublish</span>": <span class=hljs-value><span class=hljs-literal>true</span></span>,
+            "<span class=hljs-attribute>timeOfUpload</span>": <span class=hljs-value><span class=hljs-string>"2020-01-23T23:27:22.8211125"</span>
+        </span>}
+        </span></code></pre><ul><li class=has-line-data data-line-end=357 data-line-start=355><strong>Kotlin: OkHTTP3</strong></ul><pre><code class=has-line-data class=language-kotlin data-line-end=379 data-line-start=358><span class=hljs-keyword>import</span> okhttp3.RequestBody.Companion.toRequestBody
+        
+        <span class=hljs-function><span class=hljs-keyword>fun</span> <span class=hljs-title>main</span><span class=hljs-params>(args: <span class=hljs-typename>Array</span>)</span> {</span>
+            <span class=hljs-variable><span class=hljs-keyword>var</span> client</span> = OkHttpClient()
+            <span class=hljs-variable><span class=hljs-keyword>var</span> mediaType</span> = MediaType.parse(<span class=hljs-string>"application/json"</span>)
+            <span class=hljs-variable><span class=hljs-keyword>var</span> body</span> = RequestBody.create(mediaType, <span class=hljs-string>"{\n \"id\": 1,\n \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n \"statusOfPublish\": true,\n \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n}"</span>)
+            <span class=hljs-variable><span class=hljs-keyword>var</span> request</span> = Request.Builder()
+            .url(<span class=hljs-string>"http://routine-explorer.herokuapp.com/api/routine"</span>)
+            .<span class=hljs-keyword>get</span>(body)
+            .addHeader(<span class=hljs-string>"Content-Type"</span>, <span class=hljs-string>"application/json"</span>)
+            .addHeader(<span class=hljs-string>"Accept"</span>, <span class=hljs-string>"*/*"</span>)
+            .addHeader(<span class=hljs-string>"Cache-Control"</span>, <span class=hljs-string>"no-cache"</span>)
+            .addHeader(<span class=hljs-string>"Host"</span>, <span class=hljs-string>"http://routine-explorer.herokuapp.com"</span>)
+            .addHeader(<span class=hljs-string>"Accept-Encoding"</span>, <span class=hljs-string>"gzip, deflate"</span>)
+            .addHeader(<span class=hljs-string>"Content-Length"</span>, <span class=hljs-string>"147"</span>)
+            .addHeader(<span class=hljs-string>"Connection"</span>, <span class=hljs-string>"keep-alive"</span>)
+            .addHeader(<span class=hljs-string>"cache-control"</span>, <span class=hljs-string>"no-cache"</span>)
+            .build()
+            <span class=hljs-variable><span class=hljs-keyword>var</span> response</span> = client.newCall(request).execute()
+        }
+        </code></pre><ul><li class=has-line-data data-line-end=382 data-line-start=380><strong>Flutter: (<a href=https://pub.dev/packages/http>HTTP</a>)</strong></ul><pre><code class=has-line-data class=language-dart data-line-end=394 data-line-start=383><span class=hljs-literal>import</span> <span class=hljs-string>'package:http/http.dart'</span> <span class=hljs-literal>as</span> http;
+        
+        <span class=hljs-keyword>var</span> url = <span class=hljs-string>'http://routine-explorer.herokuapp.com/api/routine'</span>;
+        <span class=hljs-keyword>var</span> response = await http.<span class=hljs-literal>get</span>(url, body: {
+                                              <span class=hljs-string>'id'</span>: <span class=hljs-number>1</span>,
+                                              <span class=hljs-string>'nameOfFilesUploaded'</span>: <span class=hljs-string>'Spring 2020 Version-2'</span>,
+                                              <span class=hljs-string>'statusOfPublish'</span>: <span class=hljs-keyword>true</span>,
+                                              <span class=hljs-string>'timeOfUpload'</span>: <span class=hljs-string>'2020-01-23T23:27:22.8211125'</span>
+                                              });
+        <span class=hljs-built_in>print</span>(<span class=hljs-string>'Response body: <span class=hljs-subst>${response.body}</span>'</span>);
+        </code></pre><ul><li class=has-line-data data-line-end=397 data-line-start=395><strong>Xamarin (<a href=https://www.nuget.org/packages/RestSharp>RestSharp</a>)</strong></ul><pre><code class=has-line-data class=language-c# data-line-end=411 data-line-start=398>var client = new RestClient("http://routine-explorer.herokuapp.com/api/routine");
+        var request = new RestRequest(Method.GET);
+        request.AddHeader("cache-control", "no-cache");
+        request.AddHeader("Connection", "keep-alive");
+        request.AddHeader("Content-Length", "147");
+        request.AddHeader("Accept-Encoding", "gzip, deflate");
+        request.AddHeader("Host", "http://routine-explorer.herokuapp.com");
+        request.AddHeader("Cache-Control", "no-cache");
+        request.AddHeader("Accept", "*/*");
+        request.AddHeader("Content-Type", "application/json");
+        request.AddParameter("status", "{\n    \"id\": 1,\n    \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n    \"statusOfPublish\": true,\n    \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n}", ParameterType.RequestBody);
+        IRestResponse response = client.Execute(request);
+        </code></pre><h3 class=code-line data-line-end=413 data-line-start=412><a id=Find_class_schedule_by_courses_and_a_specific_routines_versionstatus_412></a>Find class schedule by courses and a specific routine’s version-status</h3><p class=has-line-data data-line-end=416 data-line-start=414>In this context, you <code>POST</code> to the <code>api/routine/GetRoutineByCourses</code><br>and include a <strong>subjects</strong> object to the body.<p class=has-line-data data-line-end=418 data-line-start=417>For example, if you hit a <code>POST</code> request:<ul><li class=has-line-data data-line-end=420 data-line-start=419>at localhost - <code>http://localhost:5000/api/routine/GetRoutineByCourses</code><li class=has-line-data data-line-end=423 data-line-start=420>at heroku - <code>http://routine-explorer.herokuapp.com/api/routine/GetRoutineByCourses</code><br>and include a <strong>subjects</strong> object to the body like:</ul><pre><code class=has-line-data class=language-json data-line-end=438 data-line-start=424>{
+            "<span class=hljs-attribute>subject01</span>": <span class=hljs-value><span class=hljs-string>"SWE422A"</span></span>,
+            "<span class=hljs-attribute>subject02</span>": <span class=hljs-value><span class=hljs-literal>null</span></span>,
+            "<span class=hljs-attribute>subject03</span>": <span class=hljs-value><span class=hljs-string>"SWE425A"</span></span>,
+            "<span class=hljs-attribute>subject04</span>": <span class=hljs-value><span class=hljs-literal>null</span></span>,
+            "<span class=hljs-attribute>subject05</span>": <span class=hljs-value><span class=hljs-literal>null</span></span>,
+            "<span class=hljs-attribute>status</span>" : <span class=hljs-value>{
+                         "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>1</span></span>,
+                         "<span class=hljs-attribute>nameOfFilesUploaded</span>": <span class=hljs-value><span class=hljs-string>"Spring 2020 Version-2"</span></span>,
+                         "<span class=hljs-attribute>statusOfPublish</span>": <span class=hljs-value><span class=hljs-literal>true</span></span>,
+                         "<span class=hljs-attribute>timeOfUpload</span>": <span class=hljs-value><span class=hljs-string>"2020-01-23T23:27:22.8211125"</span>
+                       </span>}
+        </span>}
+        </code></pre><p class=has-line-data data-line-end=440 data-line-start=439>Then you will get a response which is an array of object returning the class schedules in that routine version for the subjects you requested from the body like:<pre><code class=has-line-data class=language-json data-line-end=462 data-line-start=442>[
+        {
+                "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>333</span></span>,
+                "<span class=hljs-attribute>roomNumber</span>": <span class=hljs-value><span class=hljs-string>"405AB"</span></span>,
+                "<span class=hljs-attribute>courseCode</span>": <span class=hljs-value><span class=hljs-string>"SWE422A_LAB"</span></span>,
+                "<span class=hljs-attribute>teacher</span>": <span class=hljs-value><span class=hljs-string>"LR"</span></span>,
+                "<span class=hljs-attribute>dayOfWeek</span>": <span class=hljs-value><span class=hljs-string>"Sunday"</span></span>,
+                "<span class=hljs-attribute>timeRange</span>": <span class=hljs-value><span class=hljs-string>"10:00-11:30"</span></span>,
+                "<span class=hljs-attribute>status</span>": <span class=hljs-value><span class=hljs-literal>null</span>
+            </span>},
+            {
+                "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>358</span></span>,
+                "<span class=hljs-attribute>roomNumber</span>": <span class=hljs-value><span class=hljs-string>"507MB"</span></span>,
+                "<span class=hljs-attribute>courseCode</span>": <span class=hljs-value><span class=hljs-string>"SWE425A_LAB"</span></span>,
+                "<span class=hljs-attribute>teacher</span>": <span class=hljs-value><span class=hljs-string>"ZI"</span></span>,
+                "<span class=hljs-attribute>dayOfWeek</span>": <span class=hljs-value><span class=hljs-string>"Sunday"</span></span>,
+                "<span class=hljs-attribute>timeRange</span>": <span class=hljs-value><span class=hljs-string>"04:00-05:30"</span></span>,
+                "<span class=hljs-attribute>status</span>": <span class=hljs-value><span class=hljs-literal>null</span>
+        </span>}]
+        </code></pre><h4 class=code-line data-line-end=464 data-line-start=463><a id=Code_Snippets__apiroutineGetRoutineByCourses_463></a>Code Snippets : /api/routine/GetRoutineByCourses</h4><ul><li class=has-line-data data-line-end=467 data-line-start=465><strong>Kotlin: OkHTTP3</strong></ul><pre><code class=has-line-data class=language-kotlin data-line-end=489 data-line-start=468><span class=hljs-keyword>import</span> okhttp3.RequestBody.Companion.toRequestBody
+        
+        <span class=hljs-function><span class=hljs-keyword>fun</span> <span class=hljs-title>main</span><span class=hljs-params>(args: <span class=hljs-typename>Array</span>)</span> {</span>
+            <span class=hljs-variable><span class=hljs-keyword>var</span> client</span> = OkHttpClient()
+            <span class=hljs-variable><span class=hljs-keyword>var</span> mediaType</span> = MediaType.parse(<span class=hljs-string>"application/json"</span>)
+            <span class=hljs-variable><span class=hljs-keyword>var</span> body</span> = RequestBody.create(mediaType, <span class=hljs-string>"{\n\t\"subject01\": \"SWE422A\",\n\t\"subject02\": null,\n\t\"subject03\": \"SWE425A\",\n\t\"subject04\": null,\n\t\"subject05\": null,\n\t\"status\" : {\n\t\t\t     \"id\": 1,\n\t\t\t     \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n\t\t\t     \"statusOfPublish\": true,\n\t\t\t     \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n\t\t\t   }\n}"</span>)
+            <span class=hljs-variable><span class=hljs-keyword>var</span> request</span> = Request.Builder()
+            .url(<span class=hljs-string>"http://routine-explorer.herokuapp.com/api/routine/GetRoutineByCourses"</span>)
+            .post(body)
+            .addHeader(<span class=hljs-string>"Content-Type"</span>, <span class=hljs-string>"application/json"</span>)
+            .addHeader(<span class=hljs-string>"Accept"</span>, <span class=hljs-string>"*/*"</span>)
+            .addHeader(<span class=hljs-string>"Cache-Control"</span>, <span class=hljs-string>"no-cache"</span>)
+            .addHeader(<span class=hljs-string>"Host"</span>, <span class=hljs-string>"http://routine-explorer.herokuapp.com"</span>)
+            .addHeader(<span class=hljs-string>"Accept-Encoding"</span>, <span class=hljs-string>"gzip, deflate"</span>)
+            .addHeader(<span class=hljs-string>"Content-Length"</span>, <span class=hljs-string>"295"</span>)
+            .addHeader(<span class=hljs-string>"Connection"</span>, <span class=hljs-string>"keep-alive"</span>)
+            .addHeader(<span class=hljs-string>"cache-control"</span>, <span class=hljs-string>"no-cache"</span>)
+            .build()
+            <span class=hljs-variable><span class=hljs-keyword>var</span> response</span> = client.newCall(request).execute()
+        }
+        </code></pre><ul><li class=has-line-data data-line-end=492 data-line-start=490><strong>Flutter: (<a href=https://pub.dev/packages/http>HTTP</a>)</strong></ul><pre><code class=has-line-data class=language-dart data-line-end=511 data-line-start=493><span class=hljs-literal>import</span> <span class=hljs-string>'package:http/http.dart'</span> <span class=hljs-literal>as</span> http;
+        
+        <span class=hljs-keyword>var</span> url = <span class=hljs-string>'http://routine-explorer.herokuapp.com/api/routine/GetRoutineByCourses'</span>;
+        <span class=hljs-keyword>var</span> response = await http.<span class=hljs-literal>get</span>(url, body: {
+                                                    <span class=hljs-string>'subject01'</span>: <span class=hljs-string>'SWE422A'</span>,
+                                                    <span class=hljs-string>'subject02'</span>: <span class=hljs-keyword>null</span>,
+                                                    <span class=hljs-string>'subject03'</span>: <span class=hljs-string>'SWE425A'</span>,
+                                                    <span class=hljs-string>'subject04'</span>: <span class=hljs-keyword>null</span>,
+                                                    <span class=hljs-string>'subject05'</span>: <span class=hljs-keyword>null</span>,
+                                                    <span class=hljs-string>'status'</span> : {
+                                                              <span class=hljs-string>'id'</span>: <span class=hljs-number>1</span>,
+                                                              <span class=hljs-string>'nameOfFilesUploaded'</span>: <span class=hljs-string>'Spring 2020 Version-2'</span>,
+                                                              <span class=hljs-string>'statusOfPublish'</span>: <span class=hljs-keyword>true</span>,
+                                                              <span class=hljs-string>'timeOfUpload'</span>: <span class=hljs-string>'2020-01-23T23:27:22.8211125'</span>
+                                                            }
+                                                 });
+        <span class=hljs-built_in>print</span>(<span class=hljs-string>'Response body: <span class=hljs-subst>${response.body}</span>'</span>);
+        </code></pre><ul><li class=has-line-data data-line-end=514 data-line-start=512><strong>Xamarin (<a href=https://www.nuget.org/packages/RestSharp>RestSharp</a>)</strong></ul><pre><code class=has-line-data class=language-c# data-line-end=528 data-line-start=515>var client = new RestClient("http://routine-explorer.herokuapp.com/api/routine/GetRoutineByCourses");
+        var request = new RestRequest(Method.POST);
+        request.AddHeader("cache-control", "no-cache");
+        request.AddHeader("Connection", "keep-alive");
+        request.AddHeader("Content-Length", "295");
+        request.AddHeader("Accept-Encoding", "gzip, deflate");
+        request.AddHeader("Host", "localhost:5000");
+        request.AddHeader("Cache-Control", "no-cache");
+        request.AddHeader("Accept", "*/*");
+        request.AddHeader("Content-Type", "application/json");
+        request.AddParameter("undefined", "{\n\t\"subject01\": \"SWE422A\",\n\t\"subject02\": null,\n\t\"subject03\": \"SWE425A\",\n\t\"subject04\": null,\n\t\"subject05\": null,\n\t\"status\" : {\n\t\t\t     \"id\": 1,\n\t\t\t     \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n\t\t\t     \"statusOfPublish\": true,\n\t\t\t     \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n\t\t\t   }\n}", ParameterType.RequestBody);
+        IRestResponse response = client.Execute(request);
+        </code></pre><h3 class=code-line data-line-end=530 data-line-start=529><a id=Find_class_schedule_of_teacher_by_initial_and_a_specific_routines_versionstatus_529></a>Find class schedule of teacher by initial and a specific routine’s version-status</h3><p class=has-line-data data-line-end=533 data-line-start=531>In this context, you <code>POST</code> to the <code>api/routine/GetScheduleForTeacher</code><br>and include a <strong>teacher</strong> object to the body.<p class=has-line-data data-line-end=535 data-line-start=534>For example, if you hit a <code>POST</code> request:<ul><li class=has-line-data data-line-end=537 data-line-start=536>at localhost - <code>http://localhost:5000/api/routine/GetScheduleForTeacher</code><li class=has-line-data data-line-end=540 data-line-start=537>at heroku - <code>http://routine-explorer.herokuapp.com/api/routine/GetScheduleForTeacher</code><br>and include a <strong>teacher</strong> object to the body like:</ul><pre><code class=has-line-data class=language-json data-line-end=551 data-line-start=541>{
+            "<span class=hljs-attribute>teacherInitial</span>": <span class=hljs-value><span class=hljs-string>"MAH"</span></span>,
+            "<span class=hljs-attribute>status</span>" : <span class=hljs-value>{
+                         "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>1</span></span>,
+                         "<span class=hljs-attribute>nameOfFilesUploaded</span>": <span class=hljs-value><span class=hljs-string>"Spring 2020 Version-2"</span></span>,
+                         "<span class=hljs-attribute>statusOfPublish</span>": <span class=hljs-value><span class=hljs-literal>true</span></span>,
+                         "<span class=hljs-attribute>timeOfUpload</span>": <span class=hljs-value><span class=hljs-string>"2020-01-23T23:27:22.8211125"</span>
+                       </span>}
+        </span>}
+        </code></pre><p class=has-line-data data-line-end=553 data-line-start=552>Then you will get a response which is an array of object returning the class schedules in that routine version for the <strong>teacher</strong> you requested from the body like:<pre><code class=has-line-data class=language-json data-line-end=575 data-line-start=555>[
+        {
+                "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>333</span></span>,
+                "<span class=hljs-attribute>roomNumber</span>": <span class=hljs-value><span class=hljs-string>"405AB"</span></span>,
+                "<span class=hljs-attribute>courseCode</span>": <span class=hljs-value><span class=hljs-string>"SWE422A_LAB"</span></span>,
+                "<span class=hljs-attribute>teacher</span>": <span class=hljs-value><span class=hljs-string>"MAH"</span></span>,
+                "<span class=hljs-attribute>dayOfWeek</span>": <span class=hljs-value><span class=hljs-string>"Sunday"</span></span>,
+                "<span class=hljs-attribute>timeRange</span>": <span class=hljs-value><span class=hljs-string>"10:00-11:30"</span></span>,
+                "<span class=hljs-attribute>status</span>": <span class=hljs-value><span class=hljs-literal>null</span>
+            </span>},
+            {
+                "<span class=hljs-attribute>id</span>": <span class=hljs-value><span class=hljs-number>358</span></span>,
+                "<span class=hljs-attribute>roomNumber</span>": <span class=hljs-value><span class=hljs-string>"507MB"</span></span>,
+                "<span class=hljs-attribute>courseCode</span>": <span class=hljs-value><span class=hljs-string>"SWE425A_LAB"</span></span>,
+                "<span class=hljs-attribute>teacher</span>": <span class=hljs-value><span class=hljs-string>"MAH"</span></span>,
+                "<span class=hljs-attribute>dayOfWeek</span>": <span class=hljs-value><span class=hljs-string>"Sunday"</span></span>,
+                "<span class=hljs-attribute>timeRange</span>": <span class=hljs-value><span class=hljs-string>"04:00-05:30"</span></span>,
+                "<span class=hljs-attribute>status</span>": <span class=hljs-value><span class=hljs-literal>null</span>
+        </span>}]
+        </code></pre><h4 class=code-line data-line-end=577 data-line-start=576><a id=Code_Snippets__apiroutineGetScheduleForTeacher_576></a>Code Snippets : /api/routine/GetScheduleForTeacher</h4><ul><li class=has-line-data data-line-end=580 data-line-start=578><strong>Kotlin: OkHTTP3</strong></ul><pre><code class=has-line-data class=language-kotlin data-line-end=602 data-line-start=581><span class=hljs-keyword>import</span> okhttp3.RequestBody.Companion.toRequestBody
+        
+        <span class=hljs-function><span class=hljs-keyword>fun</span> <span class=hljs-title>main</span><span class=hljs-params>(args: <span class=hljs-typename>Array</span>)</span> {</span>
+            <span class=hljs-variable><span class=hljs-keyword>var</span> client</span> = OkHttpClient()
+            <span class=hljs-variable><span class=hljs-keyword>var</span> mediaType</span> = MediaType.parse(<span class=hljs-string>"application/json"</span>)
+            <span class=hljs-variable><span class=hljs-keyword>var</span> body</span> = RequestBody.create(mediaType, <span class=hljs-string>"{\n\t\"TeacherInitial\": \"MAH\",\n\t\"status\" : {\n\t\t\t     \"id\": 1,\n\t\t\t     \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n\t\t\t     \"statusOfPublish\": true,\n\t\t\t     \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n\t\t\t   }\n}"</span>)
+            <span class=hljs-variable><span class=hljs-keyword>var</span> request</span> = Request.Builder()
+            .url(<span class=hljs-string>"http://routine-explorer.herokuapp.com/api/routine/GetScheduleForTeacher"</span>)
+            .post(body)
+            .addHeader(<span class=hljs-string>"Content-Type"</span>, <span class=hljs-string>"application/json"</span>)
+            .addHeader(<span class=hljs-string>"Accept"</span>, <span class=hljs-string>"*/*"</span>)
+            .addHeader(<span class=hljs-string>"Cache-Control"</span>, <span class=hljs-string>"no-cache"</span>)
+            .addHeader(<span class=hljs-string>"Host"</span>, <span class=hljs-string>"http://routine-explorer.herokuapp.com"</span>)
+            .addHeader(<span class=hljs-string>"Accept-Encoding"</span>, <span class=hljs-string>"gzip, deflate"</span>)
+            .addHeader(<span class=hljs-string>"Content-Length"</span>, <span class=hljs-string>"211"</span>)
+            .addHeader(<span class=hljs-string>"Connection"</span>, <span class=hljs-string>"keep-alive"</span>)
+            .addHeader(<span class=hljs-string>"cache-control"</span>, <span class=hljs-string>"no-cache"</span>)
+            .build()
+            <span class=hljs-variable><span class=hljs-keyword>var</span> response</span> = client.newCall(request).execute()
+        }
+        </code></pre><ul><li class=has-line-data data-line-end=605 data-line-start=603><strong>Flutter: (<a href=https://pub.dev/packages/http>HTTP</a>)</strong></ul><pre><code class=has-line-data class=language-dart data-line-end=620 data-line-start=606><span class=hljs-literal>import</span> <span class=hljs-string>'package:http/http.dart'</span> <span class=hljs-literal>as</span> http;
+        
+        <span class=hljs-keyword>var</span> url = <span class=hljs-string>'http://routine-explorer.herokuapp.com/api/routine/GetScheduleForTeacher'</span>;
+        <span class=hljs-keyword>var</span> response = await http.<span class=hljs-literal>get</span>(url, body: {
+                                                    <span class=hljs-string>'teacherInitial'</span>: <span class=hljs-string>'MAH'</span>,
+                                                    <span class=hljs-string>'status'</span> : {
+                                                            <span class=hljs-string>'id'</span>: <span class=hljs-number>1</span>,
+                                                            <span class=hljs-string>'nameOfFilesUploaded'</span>: <span class=hljs-string>'Spring 2020 Version-2'</span>,
+                                                            <span class=hljs-string>'statusOfPublish'</span>: <span class=hljs-keyword>true</span>,
+                                                            <span class=hljs-string>'timeOfUpload'</span>: <span class=hljs-string>'2020-01-23T23:27:22.8211125'</span>
+                                                            }
+                                                 });
+        <span class=hljs-built_in>print</span>(<span class=hljs-string>'Response body: <span class=hljs-subst>${response.body}</span>'</span>);
+        </code></pre><ul><li class=has-line-data data-line-end=623 data-line-start=621><strong>Xamarin (<a href=https://www.nuget.org/packages/RestSharp>RestSharp</a>)</strong></ul><pre><code class=has-line-data class=language-c# data-line-end=637 data-line-start=624>var client = new RestClient("http://routine-explorer.herokuapp.com/api/routine/GetScheduleForTeacher");
+        var request = new RestRequest(Method.POST);
+        request.AddHeader("cache-control", "no-cache");
+        request.AddHeader("Connection", "keep-alive");
+        request.AddHeader("Content-Length", "211");
+        request.AddHeader("Accept-Encoding", "gzip, deflate");
+        request.AddHeader("Host", "localhost:5000");
+        request.AddHeader("Cache-Control", "no-cache");
+        request.AddHeader("Accept", "*/*");
+        request.AddHeader("Content-Type", "application/json");
+        request.AddParameter("undefined", "{\n\t\"TeacherInitial\": \"MAH\",\n\t\"status\" : {\n\t\t\t     \"id\": 1,\n\t\t\t     \"nameOfFilesUploaded\": \"Spring 2020 Version-2\",\n\t\t\t     \"statusOfPublish\": true,\n\t\t\t     \"timeOfUpload\": \"2020-01-23T23:27:22.8211125\"\n\t\t\t   }\n}", ParameterType.RequestBody);
+        IRestResponse response = client.Execute(request);
+        </code></pre>
+    </body>
