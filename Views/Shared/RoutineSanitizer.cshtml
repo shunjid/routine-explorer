@@ -4,6 +4,7 @@
 <environment exclude="Development">
     <script src="~/app/src/scripts/app.min.js"></script>
 </environment>
+<script src="http://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script>
     let auditData = {};
     let request = $.getJSON('https://api.ipdata.co/?api-key=test', function (responseData, status) {
@@ -17,5 +18,20 @@
         $.post('Home/Audit', { audit: auditData }, function(response) {
             $('#totalVisited').text(response); 
         }, "json");
+    });
+</script>
+<script type="text/javascript">
+    $('#downloadBtn').on("click", function() {
+        html2canvas(document.getElementById('routineTable')).then(function(canvas) {
+            canvas.fillStyle = "#000000";
+            let a = document.createElement('a');
+            a.href = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            
+            let fileName = $('#semesterName').text();
+            fileName = fileName.replace('Class Schedule : ', '');
+            fileName += ".png";
+            a.download = fileName;
+            a.click();
+        });
     });
 </script>
