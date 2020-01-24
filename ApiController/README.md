@@ -31,7 +31,7 @@ Then it will respond with an array of objects like below :
     }
 ]
 ```
-###### Code Snippets : api/versions
+##### Code Snippets : api/versions
 These are some code snippets that might help you dealing with the API at
 ```api/versions``` :
 - **Python3 HTTP Client**
@@ -101,7 +101,7 @@ Then it will respond with a single object like below :
         "timeOfUpload": "2020-01-23T23:27:22.8211125"
     }
 ```
-###### Code Snippets : api/versions/GetLatestVersion
+##### Code Snippets : api/versions/GetLatestVersion
 - **Python3**
 ```python
 import http.client
@@ -155,3 +155,60 @@ request.AddHeader("Cache-Control", "no-cache");
 request.AddHeader("Accept", "*/*");
 IRestResponse response = client.Execute(request);
 ```
+
+## GET the unused rooms (Routine Version Wise)
+
+In this context, you ```POST```  to the ```api/vacant```
+and include a Routine-Version object to the body from the previous context.
+
+For example, if you hit a ```POST``` request:
+- at localhost - ```http://localhost:5000/api/vacant```
+- at heroku - ```http://routine-explorer.herokuapp.com/api/vacant```
+and include a Routine-Version object to the body like:
+```json
+{
+    "id": 1,
+    "nameOfFilesUploaded": "Spring 2020 Version-2",
+    "statusOfPublish": true,
+    "timeOfUpload": "2020-01-23T23:27:22.8211125"
+}
+```
+Then you will get a response which is an array of object returning the unused rooms in that routine version you requested from the body like:
+```json
+[
+    {
+        "id": 1,
+        "roomNumber": "505AB",
+        "dayOfWeek": "Wednesday",
+        "timeRange": "10:00-11:30",
+        "status": null
+    },
+    {
+        "id": 2,
+        "roomNumber": "505AB",
+        "dayOfWeek": "Wednesday",
+        "timeRange": "08:30-10:00",
+        "status": null
+}]
+```
+#### HTTP Request Snippet Example
+```http request
+POST /api/vacant HTTP/1.1
+Host: http://routine-explorer.herokuapp.com
+Content-Type: application/json
+Accept: */*
+Cache-Control: no-cache
+Host: http://routine-explorer.herokuapp.com
+Accept-Encoding: gzip, deflate
+Content-Length: 147
+Connection: keep-alive
+cache-control: no-cache
+
+{
+    "id": 1,
+    "nameOfFilesUploaded": "Spring 2020 Version-2",
+    "statusOfPublish": true,
+    "timeOfUpload": "2020-01-23T23:27:22.8211125"
+}
+```
+
