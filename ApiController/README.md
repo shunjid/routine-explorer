@@ -13,7 +13,7 @@ applications like:
 Rest of the part of this documentation will be discussed on module-wise API so that
 people willing to built applications for the Dept. of SWE, can gather some idea on how to use these APIs.
 
-## GET all versions of routine
+### GET version-status of all available routines
 
 To get the **list** of routines of different versions, you need to hit the api at `api/versions`. For example, if you hit a 
 `GET` request:
@@ -86,7 +86,7 @@ request.AddHeader("Accept", "*/*");
 IRestResponse response = client.Execute(request);
 ```
 
-## GET the latest version of routine
+### GET the latest version-status among all available routines
 
 To get the latest version of routine object you need to hit the api at `api/versions/GetLatestVersion`. For example, if you hit a 
 `GET` request:
@@ -151,7 +151,7 @@ request.AddHeader("Accept", "*/*");
 IRestResponse response = client.Execute(request);
 ```
 
-## Find the unused rooms (Routine Version Wise)
+### Find all unused rooms by version-status
 
 In this context, you `POST`  to the `api/vacant`
 and include a Routine-Version object to the body from the previous context.
@@ -272,7 +272,7 @@ request.AddParameter("status", "{\n    \"id\": 1,\n    \"nameOfFilesUploaded\": 
 IRestResponse response = client.Execute(request);
 ```
 
-## GET all class schedules of a specific Routine version
+### GET all class schedules of a specific routine's version-status
 
 In this context, you hit `GET`  to the `api/routine`
 and include a Routine-Version object.
@@ -398,7 +398,7 @@ request.AddParameter("status", "{\n    \"id\": 1,\n    \"nameOfFilesUploaded\": 
 IRestResponse response = client.Execute(request);
 ```
 
-## Find class schedule by courses (Routine Version Wise)
+### Find class schedule by courses and a specific routine's version-status
 
 In this context, you `POST`  to the `api/routine/GetRoutineByCourses`
 and include a **subjects** object to the body.
@@ -515,7 +515,7 @@ request.AddParameter("undefined", "{\n\t\"subject01\": \"SWE422A\",\n\t\"subject
 IRestResponse response = client.Execute(request);
 ```
 
-## Find class schedule of teacher by initial (Routine Version Wise)
+### Find class schedule of teacher by initial and a specific routine's version-status
 
 In this context, you `POST`  to the `api/routine/GetScheduleForTeacher`
 and include a **teacher** object to the body.
