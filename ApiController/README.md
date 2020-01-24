@@ -476,7 +476,6 @@ fun main(args: Array) {
 }
 ```
 
-
 -   **Flutter: ([HTTP](https://pub.dev/packages/http))**
 
 ```dart
@@ -498,6 +497,7 @@ var response = await http.get(url, body: {
                                          });
 print('Response body: ${response.body}');
 ```
+
 -   **Xamarin ([RestSharp](https://www.nuget.org/packages/RestSharp))**
 
 ```c#
